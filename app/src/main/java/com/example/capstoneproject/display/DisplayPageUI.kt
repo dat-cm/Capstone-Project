@@ -1,5 +1,9 @@
+/*
+This file is used to create UI for displaying "Food Subscriptions"
+*/
 @file:OptIn(ExperimentalMaterial3Api::class)
 package com.example.capstoneproject.display
+
 import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -12,9 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.example.capstoneproject.navigator.PageNavigators
 import com.example.capstoneproject.navigator.Routes
-
 import com.example.capstoneproject.ui.theme.PartyPink
 
 class DisplayPageUI {

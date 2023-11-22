@@ -1,13 +1,12 @@
+/*
+This file is used to control the navigation between pages
+ */
 package com.example.capstoneproject.navigator
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.capstoneproject.add.AddPageUI
-import com.example.capstoneproject.display.DisplayPageUI
-import com.example.capstoneproject.edit.EditPageUI
 
 class PageNavigators {
     @Composable

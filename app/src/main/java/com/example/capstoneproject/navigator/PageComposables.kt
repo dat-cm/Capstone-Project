@@ -1,3 +1,6 @@
+/*
+This file is used to create @Composable functions to get pages to navigate
+ */
 package com.example.capstoneproject.navigator
 
 import androidx.compose.runtime.Composable

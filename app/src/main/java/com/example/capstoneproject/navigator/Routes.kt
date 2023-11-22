@@ -1,6 +1,7 @@
+/*
+This file is used to store Routes and their naming for easy access
+ */
 package com.example.capstoneproject.navigator
-
-import androidx.navigation.Navigation
 
 sealed class Routes  (val route: String){
     object Display : Routes("Display")
