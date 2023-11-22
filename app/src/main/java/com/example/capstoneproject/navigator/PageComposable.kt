@@ -9,7 +9,7 @@ import com.example.capstoneproject.add.AddPageUI
 import com.example.capstoneproject.display.DisplayPageUI
 import com.example.capstoneproject.edit.EditPageUI
 
-class PageComposables
+class PageComposable
 {
     @Composable
     fun ToDisplay(navController: NavHostController){

@@ -14,13 +14,13 @@ class PageNavigators {
         val navigationController = rememberNavController()
         NavHost(navController = navigationController, startDestination = "Display"){
             composable(Routes.Add.route){
-                PageComposables().ToAdd(navigationController)
+                PageComposable().ToAdd(navigationController)
             }
             composable(Routes.Display.route){
-                PageComposables().ToDisplay(navigationController)
+                PageComposable().ToDisplay(navigationController)
             }
             composable(Routes.Edit.route){
-                PageComposables().ToEdit(navigationController)
+                PageComposable().ToEdit(navigationController)
             }
         }
     }
