@@ -8,9 +8,14 @@ import androidx.navigation.NavHostController
 import com.example.capstoneproject.add.AddPageUI
 import com.example.capstoneproject.display.DisplayPageUI
 import com.example.capstoneproject.edit.EditPageUI
+import com.example.capstoneproject.homepage.HomePageUI
 
 class PageComposable
 {
+    @Composable
+    fun ToHome(navController: NavHostController){
+        return HomePageUI().BuildHomePageUI(navController)
+    }
     @Composable
     fun ToDisplay(navController: NavHostController){
         return DisplayPageUI().BuildDisplayPage(navController)

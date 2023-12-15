@@ -28,18 +28,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-class DisplaySubscriptionPage(
-    subscriptionName: String,
-    subscriptionDay: String,
-    subscriptionTime: String,
-    playSubscription: Boolean
-
-) {
-    //variables used for displaying all contents on subscription page
-    var mSubscriptionName: String = subscriptionName
-    var mSubscriptionDay: String = subscriptionDay
-    var mSubscriptionTime: String = subscriptionTime
-    var mPlaySubscription: Boolean = playSubscription
-
-}

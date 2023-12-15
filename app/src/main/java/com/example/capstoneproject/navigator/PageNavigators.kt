@@ -12,7 +12,7 @@ class PageNavigators {
     @Composable
     fun Navigation(){
         val navigationController = rememberNavController()
-        NavHost(navController = navigationController, startDestination = "Display"){
+        NavHost(navController = navigationController, startDestination = "Home"){
             composable(Routes.Add.route){
                 PageComposable().ToAdd(navigationController)
             }
@@ -21,6 +21,9 @@ class PageNavigators {
             }
             composable(Routes.Edit.route){
                 PageComposable().ToEdit(navigationController)
+            }
+            composable(Routes.Home.route){
+                PageComposable().ToHome(navigationController)
             }
         }
     }
