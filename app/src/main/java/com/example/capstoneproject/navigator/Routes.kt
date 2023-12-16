@@ -5,7 +5,6 @@ package com.example.capstoneproject.navigator
 
 sealed class Routes  (val route: String){
     object Home: Routes("Home")
-    object Display : Routes("Display")
-    object Add : Routes("Create")
-    object Edit : Routes("Edit")
+    object Selection : Routes("Selection")
+    object Preferences : Routes("Preferences")
 }

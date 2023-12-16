@@ -12,15 +12,12 @@ class PageNavigators {
     @Composable
     fun Navigation(){
         val navigationController = rememberNavController()
-        NavHost(navController = navigationController, startDestination = "Home"){
-            composable(Routes.Add.route){
-                PageComposable().ToAdd(navigationController)
+        NavHost(navController = navigationController, startDestination = "Preferences"){
+            composable(Routes.Preferences.route){
+                PageComposable().ToPreferences(navigationController)
             }
-            composable(Routes.Display.route){
-                PageComposable().ToDisplay(navigationController)
-            }
-            composable(Routes.Edit.route){
-                PageComposable().ToEdit(navigationController)
+            composable(Routes.Selection.route){
+                PageComposable().ToSelection(navigationController)
             }
             composable(Routes.Home.route){
                 PageComposable().ToHome(navigationController)

@@ -56,7 +56,7 @@ class HomePageUI {
             drawerContent = {
                 ModalDrawerSheet {
                     DrawerHeader()
-                    DrawerBody{ navController.navigate(Routes.Display.route) }
+                    DrawerBody{ navController.navigate(Routes.Selection.route) }
                 }
             },
         ) {

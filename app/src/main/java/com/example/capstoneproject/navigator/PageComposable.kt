@@ -5,9 +5,8 @@ package com.example.capstoneproject.navigator
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.example.capstoneproject.add.AddPageUI
-import com.example.capstoneproject.display.DisplayPageUI
-import com.example.capstoneproject.edit.EditPageUI
+import com.example.capstoneproject.selection.SelectionPageUI
+import com.example.capstoneproject.preferences.PreferencesPageUI
 import com.example.capstoneproject.homepage.HomePageUI
 
 class PageComposable
@@ -17,16 +16,12 @@ class PageComposable
         return HomePageUI().BuildHomePageUI(navController)
     }
     @Composable
-    fun ToDisplay(navController: NavHostController){
-        return DisplayPageUI().BuildDisplayPage(navController)
+    fun ToSelection(navController: NavHostController){
+        return SelectionPageUI().BuildSelectionPage(navController)
     }
     @Composable
-    fun ToAdd(navController: NavHostController){
-        return AddPageUI().BuildAddPage(navController)
-    }
-    @Composable
-    fun ToEdit(navController: NavHostController){
-        return EditPageUI().BuildEditPage(navController)
+    fun ToPreferences(navController: NavHostController){
+        return PreferencesPageUI().BuildPreferencesUI(navController)
     }
 
 }
