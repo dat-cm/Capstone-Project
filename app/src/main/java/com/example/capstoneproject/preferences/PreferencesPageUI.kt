@@ -1,6 +1,3 @@
-/*
-This file is used to create UI for "Edit Subscriptions"
-*/
 package com.example.capstoneproject.preferences
 
 import androidx.compose.foundation.layout.Column
