@@ -10,7 +10,7 @@ data class Food(
     @ColumnInfo("food_id") var foodId : Int,
     @ColumnInfo ("food_name") var foodName: String,
     @ColumnInfo ("food_price") var foodPrice: Double,
-    @ColumnInfo("food_category") var foodCategory: List<String>,
+    @ColumnInfo("food_category") var foodCategory: String,
     @ColumnInfo("food_image") var foodImage: String,
     @ColumnInfo("restaurant_id") var restaurantId: Int,
 )

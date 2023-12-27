@@ -6,8 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "restaurant")
 data class Restaurant(
-    @PrimaryKey (autoGenerate = true)
-    @ColumnInfo("restaurant_id") var restaurantId: Int = 0,
     @ColumnInfo ("restaurant_name") var restaurantName: String,
-    @ColumnInfo ("restaurant_category") var restaurantCategory : List<String>
-)
+    @ColumnInfo ("restaurant_category") var restaurantCategory : String
+){
+    @PrimaryKey (autoGenerate = true)
+    @ColumnInfo("restaurant_id") var restaurantId: Int = 0
+}

@@ -33,7 +33,7 @@ fun TypePreferenceChoice(){
 }
 
 @Composable
-fun SingleSelect() {
+fun SingleSelect() : String {
     var selectedOption by remember { mutableStateOf("") }
 
     Column(
@@ -47,6 +47,7 @@ fun SingleSelect() {
         SingleSelectItem("Vegetarian", selectedOption, onSelected = { selectedOption = it })
         SingleSelectItem("Vegan", selectedOption, onSelected = { selectedOption = it })
     }
+    return selectedOption
 }
 
 @Composable

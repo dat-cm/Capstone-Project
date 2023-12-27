@@ -15,32 +15,34 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.category.Category
+import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.preferences.SingleSelect
 import kotlinx.coroutines.launch
 
-class ToInsertCategory{
+class ToInsertRestaurant {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun CategoryUI(capstoneViewModel: CapstoneViewModel){
-        var categoryName by remember { mutableStateOf("") }
-        var categoryType by remember { mutableStateOf("") }
+    fun RestaurantUI(capstoneViewModel: CapstoneViewModel){
+        var restaurantName by remember { mutableStateOf("") }
+        var restaurantType by remember { mutableStateOf("") }
         Scaffold{
             Column{
                 TextField(
-                    value = categoryName,
-                    onValueChange = {categoryName=it}
+                    value = restaurantName,
+                    onValueChange = {restaurantName=it},
+                    label = { Text(text = "Name")}
                 )
-                categoryType = SingleSelect()
+                restaurantType = SingleSelect()
                 Button(
-                    enabled = !(categoryName == "" && categoryType == ""),
+                    enabled = !(restaurantName == "" && restaurantType == ""),
                     onClick = {
-                    capstoneViewModel.viewModelScope.launch {
-                        capstoneViewModel.insertCategory(Category(categoryName, categoryType))
-                        categoryName = ""
-                        categoryType = ""
-                    }
-                }) {
+                        capstoneViewModel.viewModelScope.launch {
+                            capstoneViewModel.insertRestaurant(Restaurant(restaurantName, restaurantType))
+                            restaurantName = ""
+                            restaurantType = ""
+                        }
+                    }) {
                     Text("Save")
                 }
             }

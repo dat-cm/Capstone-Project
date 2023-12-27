@@ -30,8 +30,9 @@ class MainActivity : ComponentActivity() {
                     color = Color.White
                 ) {
                     val owner = LocalViewModelStoreOwner.current
+                    val capstoneViewModel: CapstoneViewModel
                     owner?.let {
-                        val capstoneViewModel : CapstoneViewModel = viewModel(
+                        capstoneViewModel  = viewModel(
                             it,
                             "CapstoneViewModel",
                             CapstoneViewModelFactory(
@@ -41,8 +42,8 @@ class MainActivity : ComponentActivity() {
                         val categoryList by capstoneViewModel.categoryList.observeAsState()
                         val restaurantList by capstoneViewModel.restaurantList.observeAsState()
                         val foodList by capstoneViewModel.foodList.observeAsState()
+                        PageNavigators().Navigation(capstoneViewModel)
                     }
-                    PageNavigators().Navigation()
                 }
             }
         }

@@ -5,13 +5,14 @@ package com.example.capstoneproject.navigator
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.selection.SelectionPageUI
 import com.example.capstoneproject.preferences.PreferencesPageUI
 import com.example.capstoneproject.homepage.HomePageUI
 import com.example.capstoneproject.data.databasepages.ToInsertCategory
+import com.example.capstoneproject.data.databasepages.ToInsertRestaurant
 
-class PageComposable
-{
+class PageComposable{
     @Composable
     fun ToHome(navController: NavHostController){
         return HomePageUI().BuildHomePageUI(navController)
@@ -26,8 +27,13 @@ class PageComposable
     }
 
     @Composable
-    fun ToCategoryInsertion(navController: NavHostController){
-        return ToInsertCategory().CategoryUI(navController)
+    fun ToCategoryInsertion(capstoneViewModel: CapstoneViewModel){
+        return ToInsertCategory().CategoryUI(capstoneViewModel)
+    }
+
+    @Composable
+    fun ToRestaurantInsertion(capstoneViewModel: CapstoneViewModel){
+        return ToInsertRestaurant().RestaurantUI(capstoneViewModel)
     }
 
 }

@@ -27,7 +27,7 @@ interface FoodDao {
     //get specific food
     //(to retrieve specific food info using restaurant_id and category
     // which matches the restaurant_category and category)
-    @Query("Select * FROM food WHERE restaurant_id = :restaurantId AND food_category = food_category")
+    @Query("Select * FROM food WHERE restaurant_id = :restaurantId AND food_category = :foodCategory")
     fun getSpecificFoodUsingRestaurantId(restaurantId: Int, foodCategory: String): Flow<Food>
 
 }
