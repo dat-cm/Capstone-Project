@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -46,17 +47,17 @@ import com.example.capstoneproject.ui.theme.PartyPink
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 class HomePageUI {
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun BuildHomePageUI(navController: NavHostController){
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
         val scope = rememberCoroutineScope()
+
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
                 ModalDrawerSheet {
                     DrawerHeader()
-                    DrawerBody{ navController.navigate(Routes.Selection.route) }
+                    DrawerBody{ navController.navigate(it) }
                 }
             },
         ) {
@@ -77,7 +78,6 @@ class HomePageUI {
                     FocusTextField()
                     BuildBody()
                 }
-
             }
         }
     }
@@ -183,18 +183,38 @@ class HomePageUI {
     }
     @Composable
     fun DrawerBody(
-        onItemClick: () ->Unit){
+        onItemClick: (String) -> Unit
+    ){
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)) {
-            Row(modifier = Modifier.clickable{onItemClick()}){
+                .padding(16.dp)
+        ) {
+            Row(modifier = Modifier
+                .clickable { onItemClick(Routes.Selection.route) }
+                .padding(bottom = 16.dp)) {
                 Icon(
                     imageVector = Icons.Rounded.PlayArrow,
                     contentDescription = "Playlist",
-                    Modifier.size(28.dp))
-                Text(text = "Food Subscription",
-                    fontSize = 20.sp,
+                    Modifier.size(32.dp),
+                    tint = PartyPink
+                )
+                Text(
+                    text = "Food Subscription",
+                    fontSize = 24.sp,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
+            Row(modifier = Modifier.clickable { onItemClick(Routes.Like.route) }) {
+                Icon(
+                    imageVector = Icons.Rounded.Favorite,
+                    contentDescription = "Likes",
+                    Modifier.size(32.dp),
+                    tint = PartyPink
+                )
+                Text(
+                    text = "Likes",
+                    fontSize = 24.sp,
                     modifier = Modifier.padding(start = 16.dp)
                 )
             }

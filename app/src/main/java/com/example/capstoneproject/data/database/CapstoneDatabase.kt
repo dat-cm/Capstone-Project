@@ -10,17 +10,26 @@ import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.food.FoodDao
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.restaurant.RestaurantDao
+import com.example.capstoneproject.data.database.user.User
+import com.example.capstoneproject.data.database.user.UserDao
+import com.example.capstoneproject.data.database.userpreferences.UserPreferences
+import com.example.capstoneproject.data.database.userpreferences.UserPreferencesDao
 
 @Database(
     entities =
     [Category::class,
         Food::class,
-        Restaurant::class],
+        Restaurant::class,
+        //User::class,
+        //UserPreferences::class
+    ],
     version =  1)
 abstract class CapstoneDatabase : RoomDatabase(){
     abstract fun foodDao(): FoodDao
     abstract fun restaurantDao(): RestaurantDao
     abstract fun categoryDao(): CategoryDao
+    //abstract fun userDao() :UserDao
+    //abstract fun userPreferencesDao(): UserPreferencesDao
 
     companion object{
         @Volatile

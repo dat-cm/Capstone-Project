@@ -51,6 +51,26 @@ fun SingleSelect() : String {
 }
 
 @Composable
+fun SingleSelectCategory() : String {
+    var selectedOption by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        SingleSelectItem("Meat", selectedOption, onSelected = { selectedOption = it })
+        SingleSelectItem("Noodle", selectedOption, onSelected = { selectedOption = it })
+        SingleSelectItem("Rice", selectedOption, onSelected = { selectedOption = it })
+        SingleSelectItem("Fastfood", selectedOption, onSelected = { selectedOption = it })
+        SingleSelectItem("Dessert", selectedOption, onSelected = { selectedOption = it })
+        SingleSelectItem("Seafood", selectedOption, onSelected = { selectedOption = it })
+    }
+    return selectedOption
+}
+
+@Composable
 fun SingleSelectItem(
     text: String,
     selectedOption: String,

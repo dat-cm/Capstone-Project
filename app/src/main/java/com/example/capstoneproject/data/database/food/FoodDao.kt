@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.example.capstoneproject.data.databasepages.ToInsertCategory
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,11 +15,14 @@ interface FoodDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFood(food: Food)
 
-    @Delete
-    suspend fun deleteFood(food: Food)
+    @Query("Delete FROM food WHERE food_id = :foodId")
+    suspend fun deleteFood(foodId: Int)
 
-    @Update
-    suspend fun updateFood(food: Food)
+    @Query("Update food Set food_image = :image Where food_id = :foodId")
+    suspend fun updateFoodImage(image: String, foodId: Int)
+
+    @Query("Update food Set food_category = :category Where food_id = :foodId")
+    suspend fun updateFoodCategory(category: String, foodId: Int)
 
     //get all categories (retrieve the name and ids)
     @Query("Select * FROM food")

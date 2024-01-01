@@ -5,12 +5,11 @@ package com.example.capstoneproject.navigator
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.selection.SelectionPageUI
 import com.example.capstoneproject.preferences.PreferencesPageUI
 import com.example.capstoneproject.homepage.HomePageUI
-import com.example.capstoneproject.data.databasepages.ToInsertCategory
-import com.example.capstoneproject.data.databasepages.ToInsertRestaurant
+import com.example.capstoneproject.likes.LikesPageUI
+import com.example.capstoneproject.recurring.RecurPageUI
 
 class PageComposable{
     @Composable
@@ -27,6 +26,19 @@ class PageComposable{
     }
 
     @Composable
+    fun ToLike(navController: NavHostController){
+        return LikesPageUI().BuildLikesUI(navController)
+    }
+
+    @Composable
+    fun ToRecur(
+        navController: NavHostController, foodName: String?, foodPrice: Double?,
+        restaurant: String?, image: String?){
+        return RecurPageUI().BuildRecurUI(navController, foodName, foodPrice,
+            restaurant, image)
+    }
+
+    /*@Composable
     fun ToCategoryInsertion(capstoneViewModel: CapstoneViewModel){
         return ToInsertCategory().CategoryUI(capstoneViewModel)
     }
@@ -36,4 +48,13 @@ class PageComposable{
         return ToInsertRestaurant().RestaurantUI(capstoneViewModel)
     }
 
+    @Composable
+    fun ToFoodInsertion(capstoneViewModel: CapstoneViewModel){
+        return ToInsertFood().FoodUI(capstoneViewModel)
+    }*/
+
+    //@Composable
+    //fun ToUserInsertion(capstoneViewModel: CapstoneViewModel){
+    //    return ToInsertUser().UserUI(capstoneViewModel)
+    //}
 }

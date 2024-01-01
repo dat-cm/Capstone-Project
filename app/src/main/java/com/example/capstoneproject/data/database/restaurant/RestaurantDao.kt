@@ -15,11 +15,11 @@ interface RestaurantDao
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRestaurant(restaurant: Restaurant)
 
-    @Delete
-    suspend fun deleteRestaurant(restaurant: Restaurant)
+    @Query("Delete FROM restaurant WHERE restaurant_id = :restaurantId")
+    suspend fun deleteRestaurant(restaurantId: Int)
 
-    @Update
-    suspend fun updateRestaurant(restaurant: Restaurant)
+    //@Update
+    //suspend fun updateRestaurant(restaurant: Restaurant)
 
     //get all categories (retrieve the name and ids)
     @Query("Select * FROM restaurant")

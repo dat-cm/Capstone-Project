@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
                         val categoryList by capstoneViewModel.categoryList.observeAsState()
                         val restaurantList by capstoneViewModel.restaurantList.observeAsState()
                         val foodList by capstoneViewModel.foodList.observeAsState()
+                        //val userPrefList by capstoneViewModel.userPrefList.observeAsState()
                         PageNavigators().Navigation(capstoneViewModel)
                     }
                 }

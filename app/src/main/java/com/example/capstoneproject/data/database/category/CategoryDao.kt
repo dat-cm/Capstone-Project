@@ -14,11 +14,11 @@ interface CategoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategory(category: Category)
 
-    @Delete
-    suspend fun deleteCategory(category: Category)
+    @Query("Delete From category where category_id = :categoryId")
+    suspend fun deleteCategory(categoryId: Int)
 
-    @Update
-    suspend fun updateCategory(category: Category)
+    //@Update
+    //suspend fun updateCategory(category: Category)
 
     //get all categories (retrieve the name and ids)
     @Query("Select * FROM category")
