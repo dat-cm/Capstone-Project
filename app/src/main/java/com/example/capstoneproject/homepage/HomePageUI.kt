@@ -1,5 +1,6 @@
 package com.example.capstoneproject.homepage
 
+import android.util.Log
 import com.example.capstoneproject.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -41,14 +42,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.capstoneproject.data.database.user.User
 import com.example.capstoneproject.navigator.Routes
 import com.example.capstoneproject.ui.theme.CoolGrey
 import com.example.capstoneproject.ui.theme.PartyPink
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+
 class HomePageUI {
     @Composable
-    fun BuildHomePageUI(navController: NavHostController){
+    fun BuildHomePageUI(navController: NavHostController, user: User?){
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
         val scope = rememberCoroutineScope()
 
@@ -56,8 +59,12 @@ class HomePageUI {
             drawerState = drawerState,
             drawerContent = {
                 ModalDrawerSheet {
-                    DrawerHeader()
-                    DrawerBody{ navController.navigate(it) }
+                    DrawerHeader(user)
+                    if (user != null) {
+                        DrawerBody(user.userPref){ route->
+                            navController.navigate(route)
+                        }
+                    }
                 }
             },
         ) {
@@ -172,17 +179,20 @@ class HomePageUI {
 
     }
     @Composable
-    fun DrawerHeader(){
+    fun DrawerHeader(user: User?){
         Box(
             modifier = Modifier
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center){
             Divider(thickness = 1.dp, modifier = Modifier.padding(top =  60.dp))
-            Text("User", fontSize = 28.sp)
+            if (user != null) {
+                Text(user.userName, fontSize = 28.sp)
+            }
         }
     }
     @Composable
     fun DrawerBody(
+        userPref: Boolean,
         onItemClick: (String) -> Unit
     ){
         Column(
@@ -191,7 +201,14 @@ class HomePageUI {
                 .padding(16.dp)
         ) {
             Row(modifier = Modifier
-                .clickable { onItemClick(Routes.Selection.route) }
+                .clickable {
+                    if(!userPref) {
+                        onItemClick(Routes.Preferences.route)
+                    }
+                    else{
+                        onItemClick(Routes.Selection.route)
+                    }
+                }
                 .padding(bottom = 16.dp)) {
                 Icon(
                     imageVector = Icons.Rounded.PlayArrow,

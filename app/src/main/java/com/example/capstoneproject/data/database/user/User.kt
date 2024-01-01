@@ -10,4 +10,6 @@ data class User(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo("user_id")
     var userId: Int = 0
+    @ColumnInfo("user_pref")
+    var userPref: Boolean = false
 }

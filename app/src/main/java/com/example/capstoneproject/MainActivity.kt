@@ -39,11 +39,12 @@ class MainActivity : ComponentActivity() {
                                 LocalContext.current.applicationContext as Application
                             )
                         )
-                        val categoryList by capstoneViewModel.categoryList.observeAsState()
+                        //val categoryList by capstoneViewModel.categoryList.observeAsState()
                         val restaurantList by capstoneViewModel.restaurantList.observeAsState()
                         val foodList by capstoneViewModel.foodList.observeAsState()
-                        //val userPrefList by capstoneViewModel.userPrefList.observeAsState()
-                        PageNavigators().Navigation(capstoneViewModel)
+                        val user by capstoneViewModel.user.observeAsState()
+                        val userPref by capstoneViewModel.userPrefList.observeAsState()
+                        PageNavigators().Navigation(capstoneViewModel, user, userPref)
                     }
                 }
             }

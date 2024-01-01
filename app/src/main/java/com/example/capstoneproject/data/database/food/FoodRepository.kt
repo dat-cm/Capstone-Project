@@ -6,7 +6,7 @@ class FoodRepository(private val foodDao: FoodDao) {
     suspend fun deleteFood(id:Int) = foodDao.deleteFood(id)
     suspend fun updateFoodImage(image: String, foodId: Int)
     = foodDao.updateFoodImage(image, foodId)
-    suspend fun updateFoodCategory(category: String, foodId: Int)
+    suspend fun updateFoodCategory(category: List<String>, foodId: Int)
         = foodDao.updateFoodCategory(category, foodId)
     fun getAllFood(): Flow<List<Food>> = foodDao.getAllFood()
     fun getSpecificFood(restaurantId: Int, foodCategory: String): Flow<Food?>

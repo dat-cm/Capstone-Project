@@ -13,11 +13,14 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 
-    @Delete
-    suspend fun deleteUser(user: User)
+    @Query("Delete From user where user_id = :userId")
+    suspend fun deleteUserById(userId: Int)
 
-    @Update
-    suspend fun updateUser(user: User)
+    @Query("Update user Set user_pref = :pref")
+    suspend fun updateUserPref(pref: Boolean)
+
+    @Query("Update user Set user_name = :userName")
+    suspend fun updateUserName(userName: String)
 
     //get all categories (retrieve the name and ids)
     @Query("Select * FROM user")
@@ -26,6 +29,6 @@ interface UserDao {
     //get specific user
     //(to retrieve specific user info using username
     // which matches username in database)
-    @Query("Select * FROM user WHERE user_name = :username")
-    fun getSpecificUser(username: String): Flow<User>
+    @Query("Select * FROM user WHERE user_id = :userId")
+    fun getSpecificUser(userId: Int): Flow<User>
 }

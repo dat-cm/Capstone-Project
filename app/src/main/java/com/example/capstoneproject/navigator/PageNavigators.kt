@@ -10,21 +10,26 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.capstoneproject.data.database.CapstoneViewModel
+import com.example.capstoneproject.data.database.user.User
+import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 
 class PageNavigators {
     @Composable
-    fun Navigation(capstoneViewModel: CapstoneViewModel){
+    fun Navigation(capstoneViewModel: CapstoneViewModel,
+                   user: User?, userPref : UserPreferences?){
         val navigationController = rememberNavController()
         NavHost(navController = navigationController,
-            startDestination = "Like"){
+            startDestination = Routes.Home.route){
+
             composable(Routes.Preferences.route){
-                PageComposable().ToPreferences(navigationController)
+                PageComposable().ToPreferences(navigationController,
+                    capstoneViewModel, user, userPref)
             }
             composable(Routes.Selection.route){
                 PageComposable().ToSelection(navigationController)
             }
             composable(Routes.Home.route){
-                PageComposable().ToHome(navigationController)
+                PageComposable().ToHome(navigationController, user)
             }
             composable(Routes.Like.route){
                 PageComposable().ToLike(navigationController)
@@ -47,18 +52,10 @@ class PageNavigators {
             )
 
             }
-            /*composable(Routes.Category.route){
-                PageComposable().ToCategoryInsertion(capstoneViewModel)
+            composable(Routes.Insert.route){
+                PageComposable().ToInsert(capstoneViewModel)
             }
-            composable(Routes.Restaurant.route){
-                PageComposable().ToRestaurantInsertion(capstoneViewModel)
-            }
-            composable(Routes.Food.route) {
-                PageComposable().ToFoodInsertion(capstoneViewModel)
-            }*/
-           // composable(Routes.User.route) {
-           //     PageComposable().ToUserInsertion(capstoneViewModel)
-           // }
+
         }
     }
 }

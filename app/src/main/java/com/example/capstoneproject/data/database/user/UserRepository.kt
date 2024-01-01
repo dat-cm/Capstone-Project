@@ -4,13 +4,14 @@ import kotlinx.coroutines.flow.Flow
 class UserRepository (private val userDao: UserDao) {
     suspend fun insertUser(user: User)
         = userDao.insertUser(user)
-    suspend fun deleteUser(user: User)
-        = userDao.deleteUser(user)
-    suspend fun updateUser(user: User)
-        = userDao.updateUser(user)
+    suspend fun deleteUserById(userId: Int)
+        = userDao.deleteUserById(userId)
+    suspend fun updateUserPref(pref: Boolean)
+        = userDao.updateUserPref(pref)
+    suspend fun updateUserName(userName: String)
+        = userDao.updateUserName(userName)
     fun getAllUser(): Flow<List<User>>
         = userDao.getAllUser()
-    fun getSpecificUser(username: String): Flow<User> =
-        userDao.getSpecificUser(username)
-
+    fun getSpecificUser(userId: Int): Flow<User> =
+        userDao.getSpecificUser(userId)
 }

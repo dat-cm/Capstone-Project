@@ -1,12 +1,9 @@
 package com.example.capstoneproject.data.database.food
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
-import com.example.capstoneproject.data.databasepages.ToInsertCategory
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,7 +19,7 @@ interface FoodDao {
     suspend fun updateFoodImage(image: String, foodId: Int)
 
     @Query("Update food Set food_category = :category Where food_id = :foodId")
-    suspend fun updateFoodCategory(category: String, foodId: Int)
+    suspend fun updateFoodCategory(category: List<String>, foodId: Int)
 
     //get all categories (retrieve the name and ids)
     @Query("Select * FROM food")

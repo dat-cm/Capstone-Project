@@ -1,5 +1,6 @@
 package com.example.capstoneproject.data.database.userpreferences
 
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -13,12 +14,18 @@ interface UserPreferencesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUserPreferences(userPreferences: UserPreferences)
 
-    @Delete
-    suspend fun deleteUserPreferences(userPreferences: UserPreferences)
+    @Query("Update user_preferences Set user_classification = :userClassification")
+    suspend fun updateUserClassification(userClassification: String)
+
+    @Query("Update user_preferences Set user_food_classification = :userFoodClassification")
+    suspend fun updateUserFoodClassification(userFoodClassification: List<String>)
+
+    @Query("Update user_preferences Set user_budget = :userBudget")
+    suspend fun updateUserBudget(userBudget: Double)
 
     @Update
-    suspend fun updateUserPreferences(userPreferences: UserPreferences)
+    suspend fun updateAllUserPref(userPref: UserPreferences)
 
-    @Query("Select * FROM user_preference Where user_id = :userid")
-    fun getAllUserPreferences(userid : Int) : Flow<List<UserPreferences>>
+    @Query("Select * FROM user_preferences WHERE user_id = :userId")
+    fun getAllUserPreferences(userId: Int) : Flow<UserPreferences>
 }
