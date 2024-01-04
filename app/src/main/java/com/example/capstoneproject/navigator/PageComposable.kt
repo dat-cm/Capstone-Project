@@ -6,6 +6,8 @@ package com.example.capstoneproject.navigator
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.example.capstoneproject.data.database.CapstoneViewModel
+import com.example.capstoneproject.data.database.food.Food
+import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.selection.SelectionPageUI
@@ -14,6 +16,7 @@ import com.example.capstoneproject.homepage.HomePageUI
 import com.example.capstoneproject.likes.LikesPageUI
 import com.example.capstoneproject.recurring.RecurPageUI
 import com.example.capstoneproject.data.databasepages.ToInsert
+import com.example.capstoneproject.data.foodList
 
 
 class PageComposable{
@@ -22,8 +25,13 @@ class PageComposable{
         return HomePageUI().BuildHomePageUI(navController, user)
     }
     @Composable
-    fun ToSelection(navController: NavHostController){
-        return SelectionPageUI().BuildSelectionPage(navController)
+    fun ToSelection(navController: NavHostController,
+                    userPref: UserPreferences?,
+                    restaurantList: List<Restaurant?>,
+                    foodList: List<Food?>,
+                    capstoneViewModel: CapstoneViewModel){
+        return SelectionPageUI().BuildSelectionPage(navController, userPref,
+            restaurantList, foodList, capstoneViewModel)
     }
     @Composable
     fun ToPreferences(

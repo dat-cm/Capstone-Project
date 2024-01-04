@@ -9,6 +9,10 @@ class FoodRepository(private val foodDao: FoodDao) {
     suspend fun updateFoodCategory(category: List<String>, foodId: Int)
         = foodDao.updateFoodCategory(category, foodId)
     fun getAllFood(): Flow<List<Food>> = foodDao.getAllFood()
-    fun getSpecificFood(restaurantId: Int, foodCategory: String): Flow<Food?>
+    fun getSpecificFood(restaurantId: Int, foodCategory: String): Flow<List<Food?>>
     = foodDao.getSpecificFoodUsingRestaurantId(restaurantId, foodCategory)
+
+    fun getSpecificFoodUsingCategory(foodCategory: String): Flow<List<Food?>>
+        = foodDao.getSpecificFoodUsingCategory(foodCategory)
+
 }

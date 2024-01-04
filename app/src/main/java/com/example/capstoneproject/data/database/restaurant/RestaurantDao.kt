@@ -24,11 +24,4 @@ interface RestaurantDao
     //get all categories (retrieve the name and ids)
     @Query("Select * FROM restaurant")
     fun getAllRestaurant() : Flow<List<Restaurant>>
-
-    //get specific restaurant
-    //(to retrieve specific ids of restaurant which matches the restaurant_category)
-    @Query("Select * FROM restaurant WHERE restaurant_category = :categoryName")
-    fun getSpecificRestaurantUsingCategory(categoryName: String): Flow<Restaurant>
-
-
 }

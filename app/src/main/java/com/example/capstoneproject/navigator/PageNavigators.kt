@@ -10,13 +10,18 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.capstoneproject.data.database.CapstoneViewModel
+import com.example.capstoneproject.data.database.food.Food
+import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
+import com.example.capstoneproject.data.foodList
 
 class PageNavigators {
     @Composable
     fun Navigation(capstoneViewModel: CapstoneViewModel,
-                   user: User?, userPref : UserPreferences?){
+                   user: User?, userPref : UserPreferences?,
+                   restaurantList: List<Restaurant?>,
+                   foodList: List<Food?>){
         val navigationController = rememberNavController()
         NavHost(navController = navigationController,
             startDestination = Routes.Home.route){
@@ -26,7 +31,8 @@ class PageNavigators {
                     capstoneViewModel, user, userPref)
             }
             composable(Routes.Selection.route){
-                PageComposable().ToSelection(navigationController)
+                PageComposable().ToSelection(navigationController,userPref, restaurantList, foodList,
+                    capstoneViewModel)
             }
             composable(Routes.Home.route){
                 PageComposable().ToHome(navigationController, user)

@@ -30,7 +30,7 @@ import com.example.capstoneproject.data.database.userpreferences.UserPreferences
         UserPreferences::class,
         UserFavourite::class
     ],
-    version =  1,
+    version =  2,
     //autoMigrations = [AutoMigration(from = 1, to = 2) ],
     exportSchema = true)
 @TypeConverters(Converters::class)

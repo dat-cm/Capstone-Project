@@ -78,20 +78,15 @@ class PreferencesPageUI {
             ) {
                 //halal/non-halal/...
                 UserClassificationChoiceTextUI()
-                if (userPref != null) {
-                    userClassification = selectUserClassification(userPref.userClassification)
-                }
+                userClassification = selectUserClassification(userPref?.userClassification ?: "")
                 if(userClassification != ""){
                     FoodPreferenceChoiceTextUI()
                     when(userClassification ){
                         "Halal", "Non-Halal", "No Preference" ->
-                            if (userPref != null) {
-                                userFoodPreferences = multiSelectForHalalOrNonHalal(userPref.userFoodClassification)
-                            }
+                            userFoodPreferences = multiSelectForHalalOrNonHalal(userPref?.userFoodClassification ?: emptyList())
+
                         "Vegan/Vegetarian" ->
-                            if (userPref != null) {
-                                userFoodPreferences = multiSelectForVegetarianOrVegan(userPref.userFoodClassification)
-                            }
+                                userFoodPreferences = multiSelectForVegetarianOrVegan(userPref?.userFoodClassification?: emptyList())
                     }
                     if(userFoodPreferences.isNotEmpty()){
                         Row{
@@ -105,9 +100,7 @@ class PreferencesPageUI {
                             Text("$${userBudget}",
                                 fontSize = 20.sp)
                         }
-                        if (userPref != null) {
-                           userBudget = budgetSlider(userPref.userBudget.toInt())
-                        }
+                           userBudget = budgetSlider(userPref?.userBudget?.toInt() ?: 0)
                     }
                 }
 

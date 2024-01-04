@@ -12,7 +12,4 @@ class RestaurantRepository(private val restaurantDao: RestaurantDao) {
     //= restaurantDao.updateRestaurant(restaurant)
     fun getAllRestaurant(): Flow<List<Restaurant>>
     = restaurantDao.getAllRestaurant()
-    fun getSpecificRestaurantUsingCategory(category: String): Flow<Restaurant> =
-        restaurantDao.getSpecificRestaurantUsingCategory(category)
-
 }

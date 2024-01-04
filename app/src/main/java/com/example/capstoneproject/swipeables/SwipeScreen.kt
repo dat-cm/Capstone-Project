@@ -42,16 +42,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.capstoneproject.data.FoodDetails
-import com.example.capstoneproject.data.foodProfiles
+import com.example.capstoneproject.data.database.food.Food
+import com.example.capstoneproject.data.foodList
 import kotlinx.coroutines.launch
 
 @Composable
 fun SwipeCards() {
     Column {
-
             Box {
-                val states = foodProfiles.reversed()
+                val states = foodList.reversed()
                     .map { it to rememberSwipeableCardState() }
                 var hint by remember {
                     mutableStateOf("Swipe a card or press a button below")
@@ -152,7 +151,7 @@ private fun CircleButton(
 @Composable
 private fun FoodCard(
     modifier: Modifier,
-    matchFood: FoodDetails,
+    matchFood: Food,
 ) {
     Card(modifier) {
         Box {
