@@ -16,22 +16,18 @@ import com.example.capstoneproject.homepage.HomePageUI
 import com.example.capstoneproject.likes.LikesPageUI
 import com.example.capstoneproject.recurring.RecurPageUI
 import com.example.capstoneproject.data.databasepages.ToInsert
-import com.example.capstoneproject.data.foodList
 
 
 class PageComposable{
     @Composable
-    fun ToHome(navController: NavHostController, user: User?){
-        return HomePageUI().BuildHomePageUI(navController, user)
+    fun ToHome(navController: NavHostController, user: User?,
+               userPref: UserPreferences?, restaurantList: List<Restaurant?>, foodList: List<Food?>){
+        return HomePageUI().BuildHomePageUI(navController, user, userPref,
+            restaurantList, foodList)
     }
     @Composable
-    fun ToSelection(navController: NavHostController,
-                    userPref: UserPreferences?,
-                    restaurantList: List<Restaurant?>,
-                    foodList: List<Food?>,
-                    capstoneViewModel: CapstoneViewModel){
-        return SelectionPageUI().BuildSelectionPage(navController, userPref,
-            restaurantList, foodList, capstoneViewModel)
+    fun ToSelection(navController: NavHostController){
+        return SelectionPageUI().BuildSelectionPage(navController)
     }
     @Composable
     fun ToPreferences(

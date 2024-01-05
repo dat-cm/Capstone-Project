@@ -42,7 +42,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.capstoneproject.data.createFoodProfiles
+import com.example.capstoneproject.data.database.food.Food
+import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
+import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.navigator.Routes
 import com.example.capstoneproject.ui.theme.CoolGrey
 import com.example.capstoneproject.ui.theme.PartyPink
@@ -51,7 +55,9 @@ import kotlinx.coroutines.launch
 
 class HomePageUI {
     @Composable
-    fun BuildHomePageUI(navController: NavHostController, user: User?){
+    fun BuildHomePageUI(navController: NavHostController, user: User?,
+                        userPref: UserPreferences?, restaurantList: List<Restaurant?>,
+                        foodList: List<Food?>){
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
         val scope = rememberCoroutineScope()
 
@@ -61,7 +67,7 @@ class HomePageUI {
                 ModalDrawerSheet {
                     DrawerHeader(user)
                     if (user != null) {
-                        DrawerBody(user.userPref){ route->
+                        DrawerBody(user.userPref, userPref,restaurantList,foodList){ route->
                             navController.navigate(route)
                         }
                     }
@@ -192,7 +198,10 @@ class HomePageUI {
     }
     @Composable
     fun DrawerBody(
-        userPref: Boolean,
+        user_Pref: Boolean,
+        userPref: UserPreferences?,
+        restaurantList: List<Restaurant?>,
+        foodList: List<Food?>,
         onItemClick: (String) -> Unit
     ){
         Column(
@@ -202,10 +211,11 @@ class HomePageUI {
         ) {
             Row(modifier = Modifier
                 .clickable {
-                    if(!userPref) {
+                    if(!user_Pref) {
                         onItemClick(Routes.Preferences.route)
                     }
                     else{
+                        createFoodProfiles(userPref, restaurantList, foodList)
                         onItemClick(Routes.Selection.route)
                     }
                 }

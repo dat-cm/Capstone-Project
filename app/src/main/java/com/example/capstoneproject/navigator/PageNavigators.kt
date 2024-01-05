@@ -14,7 +14,6 @@ import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
-import com.example.capstoneproject.data.foodList
 
 class PageNavigators {
     @Composable
@@ -31,11 +30,11 @@ class PageNavigators {
                     capstoneViewModel, user, userPref)
             }
             composable(Routes.Selection.route){
-                PageComposable().ToSelection(navigationController,userPref, restaurantList, foodList,
-                    capstoneViewModel)
+                PageComposable().ToSelection(navigationController)
             }
             composable(Routes.Home.route){
-                PageComposable().ToHome(navigationController, user)
+                PageComposable().ToHome(navigationController, user, userPref,
+                    restaurantList, foodList)
             }
             composable(Routes.Like.route){
                 PageComposable().ToLike(navigationController)
