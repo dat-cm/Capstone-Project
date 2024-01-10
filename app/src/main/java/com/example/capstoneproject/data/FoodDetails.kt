@@ -1,6 +1,5 @@
 package com.example.capstoneproject.data
 
-import android.util.Log
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
@@ -8,26 +7,27 @@ import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 var foodChoiceList: ArrayList<Food> = ArrayList()
 fun createFoodProfiles(userPref: UserPreferences?, restaurant: List<Restaurant?>,
                        food: List<Food?>) {
-    if (foodChoiceList.isNotEmpty()) foodChoiceList = ArrayList()
+    //reset list
+    if(foodChoiceList.isNotEmpty()) foodChoiceList = ArrayList()
 
-    restaurant.forEach { resCategory ->
-        if (userPref != null) {
-            if (resCategory != null) {
-                if(resCategory.restaurantCategory == userPref.userClassification){
-                    userPref.userFoodClassification.forEach{
-                            choice-> food.forEach{
-                            foodChoice->
-                        if(choice == foodChoice?.foodCategory && userPref.userBudget <= foodChoice.foodPrice){
-                        foodChoiceList.add(foodChoice)
+    restaurant.forEach{
+            resItem-> if(resItem != null){
+        if(resItem.restaurantCategory == userPref!!.userClassification) {
+            food.forEach{
+                    foodItem-> if(foodItem != null){
+                if(resItem.restaurantId == foodItem.restaurantId){
+                    if(userPref.userBudget >= foodItem.foodPrice ){
+                        userPref.userFoodClassification.forEach{
+                                item->
+                            if(item == foodItem.foodCategory){
+                                foodChoiceList.add(foodItem)
                             }
-                            }
+                        }
                     }
                 }
             }
+            }
         }
     }
-    foodChoiceList.forEach{
-        item->Log.i("Items", item.foodName)
     }
-
 }

@@ -35,7 +35,6 @@ import com.example.capstoneproject.ui.theme.PartyPink
 import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
-
 class PreferencesPageUI {
 
     @OptIn(ExperimentalMaterial3Api::class)

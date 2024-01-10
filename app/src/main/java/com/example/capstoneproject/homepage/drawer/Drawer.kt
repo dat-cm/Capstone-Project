@@ -1,5 +1,6 @@
 package com.example.capstoneproject.homepage.drawer
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,10 +41,7 @@ fun DrawerHeader(user: User?){
 }
 @Composable
 fun DrawerBody(
-    user_Pref: Boolean,
-    userPref: UserPreferences?,
-    restaurantList: List<Restaurant?>,
-    foodList: List<Food?>,
+    userPref: Boolean,
     onItemClick: (String) -> Unit
 ){
     Column(
@@ -53,11 +51,11 @@ fun DrawerBody(
     ) {
         Row(modifier = Modifier
             .clickable {
-                if(!user_Pref) {
+                if(!userPref) {
                     onItemClick(Routes.Preferences.route)
                 }
                 else{
-                    createFoodProfiles(userPref, restaurantList, foodList)
+                    //
                     onItemClick(Routes.Selection.route)
                 }
             }

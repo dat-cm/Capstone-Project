@@ -27,14 +27,20 @@ class PageComposable{
             restaurantList, foodList)
     }
     @Composable
-    fun ToSelection(navController: NavHostController, capstoneViewModel: CapstoneViewModel, user: User?){
-        return SelectionPageUI().BuildSelectionPage(navController, capstoneViewModel, user)
+    fun ToSelection(navController: NavHostController,
+                    capstoneViewModel: CapstoneViewModel,
+                    user: User?,
+                    userPref: UserPreferences?,
+                    restaurantList: List<Restaurant?>,
+                    foodList: List<Food?>){
+        return SelectionPageUI().BuildSelectionPage(
+            navController, capstoneViewModel, user, userPref, restaurantList, foodList)
     }
     @Composable
     fun ToPreferences(
         navController: NavHostController,
-        capstoneViewModel: CapstoneViewModel, user: User?, userPref: UserPreferences?
-    ){
+        capstoneViewModel: CapstoneViewModel, user: User?,
+        userPref: UserPreferences?, ){
         return PreferencesPageUI().BuildPreferencesUI(navController,
             capstoneViewModel, user, userPref)
     }

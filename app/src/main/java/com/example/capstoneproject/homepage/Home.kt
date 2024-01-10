@@ -34,7 +34,7 @@ fun HomeUI(navController: NavHostController, user: User?,
             ModalDrawerSheet {
                 DrawerHeader(user)
                 if (user != null) {
-                    DrawerBody(user.userPref, userPref,restaurantList,foodList){ route->
+                    DrawerBody(user.userPref){ route->
                         navController.navigate(route)
                     }
                 }

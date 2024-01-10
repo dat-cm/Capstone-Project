@@ -32,7 +32,8 @@ class PageNavigators {
                     capstoneViewModel, user, userPref)
             }
             composable(Routes.Selection.route){
-                PageComposable().ToSelection(navigationController, capstoneViewModel, user)
+                PageComposable().ToSelection(navigationController, capstoneViewModel,
+                    user, userPref, restaurantList, foodList)
             }
             composable(Routes.Home.route){
                 PageComposable().ToHome(navigationController, user, userPref,

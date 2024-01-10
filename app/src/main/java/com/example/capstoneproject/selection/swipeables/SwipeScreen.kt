@@ -54,7 +54,12 @@ import com.example.capstoneproject.data.foodChoiceList
 import kotlinx.coroutines.launch
 
 @Composable
-fun SwipeCards(capstoneViewModel: CapstoneViewModel, user: User?) {
+fun SwipeCards(capstoneViewModel: CapstoneViewModel,
+               user: User?,
+               userPref: UserPreferences?,
+               restaurantList: List<Restaurant?>,
+               foodList: List<Food?>) {
+    createFoodProfiles(userPref, restaurantList, foodList)
     Column {
             Box {
                 val states = foodChoiceList.reversed()

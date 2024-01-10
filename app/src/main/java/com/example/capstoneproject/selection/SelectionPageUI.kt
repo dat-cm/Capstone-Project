@@ -12,7 +12,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.capstoneproject.data.createFoodProfiles
 import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
@@ -26,7 +25,12 @@ class SelectionPageUI {
     @OptIn(ExperimentalMaterial3Api::class)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
-    fun BuildSelectionPage(navController: NavHostController, capstoneViewModel: CapstoneViewModel, user: User?){
+    fun BuildSelectionPage(navController: NavHostController,
+                           capstoneViewModel: CapstoneViewModel,
+                           user: User?,
+                           userPref: UserPreferences?,
+                           restaurantList: List<Restaurant?>,
+                           foodList: List<Food?>){
         Scaffold (
             topBar = {
                 Surface(
@@ -60,7 +64,7 @@ class SelectionPageUI {
                     )
                 }
             }){
-                SwipeCards(capstoneViewModel, user)
+                SwipeCards(capstoneViewModel, user, userPref, restaurantList, foodList)
         }
          }
     }
