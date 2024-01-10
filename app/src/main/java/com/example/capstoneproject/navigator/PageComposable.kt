@@ -9,25 +9,26 @@ import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
+import com.example.capstoneproject.data.database.userfavourite.UserFavourite
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.selection.SelectionPageUI
 import com.example.capstoneproject.preferences.PreferencesPageUI
-import com.example.capstoneproject.homepage.HomePageUI
 import com.example.capstoneproject.likes.LikesPageUI
 import com.example.capstoneproject.recurring.RecurPageUI
 import com.example.capstoneproject.data.databasepages.ToInsert
+import com.example.capstoneproject.homepage.HomeUI
 
 
 class PageComposable{
     @Composable
     fun ToHome(navController: NavHostController, user: User?,
                userPref: UserPreferences?, restaurantList: List<Restaurant?>, foodList: List<Food?>){
-        return HomePageUI().BuildHomePageUI(navController, user, userPref,
+        return HomeUI(navController, user, userPref,
             restaurantList, foodList)
     }
     @Composable
-    fun ToSelection(navController: NavHostController){
-        return SelectionPageUI().BuildSelectionPage(navController)
+    fun ToSelection(navController: NavHostController, capstoneViewModel: CapstoneViewModel, user: User?){
+        return SelectionPageUI().BuildSelectionPage(navController, capstoneViewModel, user)
     }
     @Composable
     fun ToPreferences(
@@ -39,8 +40,9 @@ class PageComposable{
     }
 
     @Composable
-    fun ToLike(navController: NavHostController){
-        return LikesPageUI().BuildLikesUI(navController)
+    fun ToLike(navController: NavHostController, restaurantList: List<Restaurant?>, userFav: List<UserFavourite?>,
+               foodList: List<Food?>){
+        return LikesPageUI().BuildLikesUI(navController, restaurantList, userFav, foodList)
     }
 
     @Composable

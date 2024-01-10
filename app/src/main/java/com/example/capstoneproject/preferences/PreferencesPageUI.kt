@@ -37,6 +37,7 @@ import kotlin.collections.ArrayList
 
 
 class PreferencesPageUI {
+
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun BuildPreferencesUI(navController: NavHostController,
@@ -227,7 +228,7 @@ class PreferencesPageUI {
             "Dessert",
             "Noodles",
             "Seafood",
-            "Fast Food",
+            "Fast food",
         )
         var selectedOptions: SnapshotStateList<String> = remember { mutableStateListOf() }
         if(userFoodClassification.isNotEmpty()) {
@@ -266,7 +267,7 @@ class PreferencesPageUI {
             "Salad",
             "Dessert",
             "Noodles",
-            "Fast Food",
+            "Fast food",
         )
         var selectedOptions: SnapshotStateList<String> = remember { mutableStateListOf() }
         if(userFoodClassification.isNotEmpty()) {

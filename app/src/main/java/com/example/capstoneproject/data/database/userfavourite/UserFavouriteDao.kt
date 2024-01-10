@@ -16,5 +16,5 @@ interface UserFavouriteDao {
     suspend fun deleteUserFavourites(favId: Int)
 
     @Query("Select * From user_favourite Where user_id = :userId")
-    fun getAllUserFavourites(userId: Int): Flow<List<UserFavourite>>
+    fun getSpecificFavourites(userId: Int): Flow<List<UserFavourite>>
 }

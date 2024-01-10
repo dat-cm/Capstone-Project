@@ -8,6 +8,7 @@ import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 var foodChoiceList: ArrayList<Food> = ArrayList()
 fun createFoodProfiles(userPref: UserPreferences?, restaurant: List<Restaurant?>,
                        food: List<Food?>) {
+    if (foodChoiceList.isNotEmpty()) foodChoiceList = ArrayList()
 
     restaurant.forEach { resCategory ->
         if (userPref != null) {
@@ -16,7 +17,7 @@ fun createFoodProfiles(userPref: UserPreferences?, restaurant: List<Restaurant?>
                     userPref.userFoodClassification.forEach{
                             choice-> food.forEach{
                             foodChoice->
-                        if(choice == foodChoice?.foodCategory){
+                        if(choice == foodChoice?.foodCategory && userPref.userBudget <= foodChoice.foodPrice){
                         foodChoiceList.add(foodChoice)
                             }
                             }
@@ -25,5 +26,8 @@ fun createFoodProfiles(userPref: UserPreferences?, restaurant: List<Restaurant?>
             }
         }
     }
-    Log.i("size", foodChoiceList.size.toString())
+    foodChoiceList.forEach{
+        item->Log.i("Items", item.foodName)
+    }
+
 }

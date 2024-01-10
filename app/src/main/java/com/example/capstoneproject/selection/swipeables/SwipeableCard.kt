@@ -1,4 +1,4 @@
-package com.example.capstoneproject.swipeables
+package com.example.capstoneproject.selection.swipeables
 
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.ui.Modifier

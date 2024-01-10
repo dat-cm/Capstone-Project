@@ -13,6 +13,7 @@ import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
+import com.example.capstoneproject.data.database.userfavourite.UserFavourite
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 
 class PageNavigators {
@@ -20,7 +21,8 @@ class PageNavigators {
     fun Navigation(capstoneViewModel: CapstoneViewModel,
                    user: User?, userPref : UserPreferences?,
                    restaurantList: List<Restaurant?>,
-                   foodList: List<Food?>){
+                   foodList: List<Food?>,
+                   userFav: List<UserFavourite?>){
         val navigationController = rememberNavController()
         NavHost(navController = navigationController,
             startDestination = Routes.Home.route){
@@ -30,14 +32,14 @@ class PageNavigators {
                     capstoneViewModel, user, userPref)
             }
             composable(Routes.Selection.route){
-                PageComposable().ToSelection(navigationController)
+                PageComposable().ToSelection(navigationController, capstoneViewModel, user)
             }
             composable(Routes.Home.route){
                 PageComposable().ToHome(navigationController, user, userPref,
                     restaurantList, foodList)
             }
             composable(Routes.Like.route){
-                PageComposable().ToLike(navigationController)
+                PageComposable().ToLike(navigationController,restaurantList, userFav, foodList)
             }
             composable("${Routes.Recur.route}/{foodName}/{foodPrice}/{restaurant}/{image}",
                 arguments = listOf(
@@ -51,10 +53,9 @@ class PageNavigators {
                 val foodName = backstackEntry.arguments?.getString("foodName")
                 val foodPrice = backstackEntry.arguments?.getFloat("foodPrice")?.toDouble()
                 val restaurant = backstackEntry.arguments?.getString("restaurant")
-                val image = backstackEntry.arguments?.getString("image")
+                val image = backstackEntry.arguments?.getString("image") ?: ""
 
-                PageComposable().ToRecur(navigationController, foodName,foodPrice, restaurant, image
-            )
+                PageComposable().ToRecur(navigationController, foodName,foodPrice, restaurant, image)
 
             }
             composable(Routes.Insert.route){

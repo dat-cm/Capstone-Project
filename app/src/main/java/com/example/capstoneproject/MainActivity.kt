@@ -44,11 +44,15 @@ class MainActivity : ComponentActivity() {
                         val foodList by capstoneViewModel.foodList.observeAsState()
                         val user by capstoneViewModel.user.observeAsState()
                         val userPref by capstoneViewModel.userPrefList.observeAsState()
+                        val userFav by capstoneViewModel.userFavList.observeAsState()
                         restaurantList?.let { it1 ->
                             foodList?.let { it2 ->
-                                PageNavigators().Navigation(capstoneViewModel,
-                                    user, userPref, it1, it2
-                                )
+                                userFav?.let { it3->
+                                    PageNavigators().Navigation(
+                                        capstoneViewModel,
+                                        user, userPref, it1, it2, it3
+                                    )
+                                }
                             }
                         }
                     }

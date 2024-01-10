@@ -17,32 +17,32 @@ class ToInsert {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     fun InsertUI(capstoneViewModel: CapstoneViewModel){
-       //val restId = 11
-
+        val restId = 1
 
         Scaffold{
             Column(){
                 Button(
                     onClick = {
                         capstoneViewModel.viewModelScope.launch {
-                            capstoneViewModel.insertUser(User("Test User"))
+                            //capstoneViewModel.insertUser(User("Test User"))
                         }
                     }) {
                     Text("User")
             }
-                Button(
-                    onClick = {
-                        capstoneViewModel.viewModelScope.launch {
-                            capstoneViewModel.deleteUserById(4)
-                        }
-                    }) {
-                    Text("delete")
-                }
+                //Button(
+                //    onClick = {
+                //        capstoneViewModel.viewModelScope.launch {
+                //            capstoneViewModel.deleteUserById(4)
+                //        }
+                //    }) {
+                //    Text("delete")
+                //}
 
                 Button(
                     onClick = {
                         capstoneViewModel.viewModelScope.launch {
-                            capstoneViewModel.insertRestaurant(Restaurant("Halal Haven","Halal"))
+                            //capstoneViewModel.insertRestaurant(Restaurant("The Leafy Fork", "Vegan/Vegetarian"))
+                            //capstoneViewModel.deleteRestaurant(15)
                         }
                     }) {
                     Text("Add Restaurant")
@@ -51,7 +51,7 @@ class ToInsert {
                 Button(
                     onClick = {
                         capstoneViewModel.viewModelScope.launch {
-                            capstoneViewModel.insertFood(Food("Noodle2",13.00,"Noodles","",1))
+
                         }
                     }) {
                     Text("Add Food")

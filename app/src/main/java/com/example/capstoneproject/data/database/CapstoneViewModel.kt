@@ -1,12 +1,9 @@
 package com.example.capstoneproject.data.database
 
 import android.app.Application
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.example.capstoneproject.data.database.category.Category
-import com.example.capstoneproject.data.database.category.CategoryRepository
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.food.FoodRepository
 import com.example.capstoneproject.data.database.restaurant.Restaurant
@@ -17,7 +14,6 @@ import com.example.capstoneproject.data.database.userfavourite.UserFavourite
 import com.example.capstoneproject.data.database.userfavourite.UserFavouriteRepository
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.data.database.userpreferences.UserPreferencesRepository
-import kotlinx.coroutines.flow.Flow
 
 class CapstoneViewModel(application: Application) : ViewModel() {
     //category
@@ -93,9 +89,6 @@ class CapstoneViewModel(application: Application) : ViewModel() {
     //suspend fun updateFoodCategory(category: String, foodId: Int)
     //   = foodRepo.updateFoodCategory(category, foodId)
 
-    fun getSpecificFoodUsingCategory(foodCategory: String)
-    = foodRepo.getSpecificFoodUsingCategory(foodCategory)
-
 
     //user
     suspend fun insertUser(user: User) = userRepo.insertUser(user)
@@ -114,8 +107,6 @@ class CapstoneViewModel(application: Application) : ViewModel() {
         = userPrefRepo.updateUserBudget(userBudget)
     suspend fun updateAllUserPreferences(userPreferences: UserPreferences)
     = userPrefRepo.updateAllUserPref(userPreferences)
-    fun getUserPref(userId: Int)
-    = userPrefRepo.getAllUserPreferences(userId)
 
     //user fav
     suspend fun insertUserFav(userFavourite: UserFavourite)

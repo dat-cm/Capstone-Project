@@ -1,4 +1,4 @@
-package com.example.capstoneproject.swipeables
+package com.example.capstoneproject.selection.swipeables
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationSpec

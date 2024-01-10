@@ -1,4 +1,4 @@
-package com.example.capstoneproject.swipeables
+package com.example.capstoneproject.selection.swipeables
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -41,17 +41,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import coil.compose.AsyncImage
 import com.example.capstoneproject.data.createFoodProfiles
+import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
+import com.example.capstoneproject.data.database.userfavourite.UserFavourite
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.data.foodChoiceList
 import kotlinx.coroutines.launch
 
 @Composable
-fun SwipeCards() {
+fun SwipeCards(capstoneViewModel: CapstoneViewModel, user: User?) {
     Column {
             Box {
                 val states = foodChoiceList.reversed()
@@ -62,7 +65,6 @@ fun SwipeCards() {
 
                 Hint(hint)
 
-                val scope = rememberCoroutineScope()
                 Box(
                     Modifier
                         .padding(24.dp)
@@ -81,6 +83,11 @@ fun SwipeCards() {
                                             // swipes are handled by the LaunchedEffect
                                             // so that we track button clicks & swipes
                                             // from the same place
+                                                   capstoneViewModel.viewModelScope.launch {
+                                                       capstoneViewModel.insertUserFav(UserFavourite(user!!.userId,
+                                                           matchFood.restaurantId,matchFood.foodId))
+                                                   }
+
                                         },
                                         onSwipeCancel = {
                                             Log.d("Swipeable-Card", "Cancelled swipe")
@@ -106,7 +113,7 @@ fun SwipeCards() {
                 ) {
                     CircleButton(
                         onClick = {
-                            scope.launch {
+                            capstoneViewModel.viewModelScope.launch {
                                 val last = states.reversed()
                                     .firstOrNull {
                                         it.second.offset.value == Offset(0f, 0f)
@@ -118,7 +125,7 @@ fun SwipeCards() {
                     )
                     CircleButton(
                         onClick = {
-                            scope.launch {
+                            capstoneViewModel.viewModelScope.launch {
                                 val last = states.reversed()
                                     .firstOrNull {
                                         it.second.offset.value == Offset(0f, 0f)
@@ -161,7 +168,7 @@ private fun FoodCard(
         Box {
             AsyncImage(contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize(),
-                model = "",
+                model = matchFood.foodImage,
                 contentDescription = null)
             Scrim(Modifier.align(Alignment.BottomCenter))
             Column(Modifier.align(Alignment.BottomStart)) {

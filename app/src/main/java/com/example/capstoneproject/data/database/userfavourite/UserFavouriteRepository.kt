@@ -10,5 +10,5 @@ class UserFavouriteRepository(private val userFavouriteDao: UserFavouriteDao) {
     suspend fun deleteUserFavourites(favId: Int)
         = userFavouriteDao.deleteUserFavourites(favId)
     fun getSpecificUserFav(userId: Int): Flow<List<UserFavourite>>
-        = userFavouriteDao.getAllUserFavourites(userId)
+        = userFavouriteDao.getSpecificFavourites(userId)
 }
