@@ -1,20 +1,16 @@
 package com.example.capstoneproject.likes
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,9 +19,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.capstoneproject.data.database.food.Food
@@ -33,7 +30,10 @@ import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.userfavourite.UserFavourite
 import com.example.capstoneproject.data.decimal.formatToTwoDecimalPlaces
 import com.example.capstoneproject.navigator.Routes
+import com.example.capstoneproject.ui.theme.CoolGrey
 import com.example.capstoneproject.ui.theme.PartyPink
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 class LikesPageUI {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -59,125 +59,191 @@ class LikesPageUI {
             }
         }) {
             paddingValues->
-            LazyColumn(
-                modifier = Modifier.padding(paddingValues)) {
-                items(userFav) {
-                        item -> ExpandableFoodItem(item,  navController, restaurant, foodList)
+            if(userFav.isNotEmpty()) {
+                LazyColumn(
+                    modifier = Modifier.padding(paddingValues)
+                ) {
+                    items(userFav) { item ->
+                        ExpandableFoodItem(item, navController, restaurant, foodList)
+                    }
                 }
-            }
-        }
-    }
-
-
-    @Composable
-    fun ExpandableFoodItem(userFav: UserFavourite?, navController: NavHostController, restaurant:
-    List<Restaurant?>,
-                           foodList: List<Food?>){
-        var isExpanded by remember { mutableStateOf(false) }
-        ElevatedCard(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-                .wrapContentHeight(align = Alignment.Top),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)) {
-            Row(modifier= Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start) {
-                ProfilePicture(userFav, foodList)
-
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Column(modifier= Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                    ){
-                        Row(modifier = Modifier
-                            .fillMaxWidth(),
-                            horizontalArrangement =
-                            Arrangement.SpaceAround) {
-                            Text(text = retrieveFoodName(userFav!!.foodId, foodList),
-                                style = MaterialTheme.typography.headlineMedium)
-                            Spacer(modifier = Modifier.width(20.dp))
-                            Button(
-                                onClick = { isExpanded = !isExpanded },
-                                modifier = Modifier
-                                    .padding(start = 8.dp)
-                                    .height(32.dp)
-                            ) {
-                                Text(if (isExpanded) "Show Less" else "Show More")
-                            }
-                        }
-                        Row {
-                            Spacer(modifier = Modifier.width(10.dp))
-                            Text(text = "$${retrieveFoodPrice(userFav!!.foodId, foodList).formatToTwoDecimalPlaces()}",
-                                style = MaterialTheme.typography.titleMedium)
-                        }
+            }else{
+                Column(
+                    modifier = Modifier
+                        .padding(
+                            start = 16.dp,
+                            end = 16.dp
+                        )
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text("Head over to Food Subscription to start liking your Food",
+                        fontSize = 24.sp,
+                        textAlign = TextAlign.Center)
+                    Button(onClick = {navController.navigate(Routes.Selection.route)},
+                        colors = ButtonDefaults.buttonColors(PartyPink)){
+                        Text("Go")
                     }
                 }
             }
-            if (isExpanded) {
-                Spacer(modifier = Modifier.height(8.dp))
+        }
+    }
 
-                ProfilePicture(userFav, foodList)
 
-                /*AsyncImage(
-                    model = foodItem.foodImage,
-                    contentDescription = "Food Image",
-                    contentScale= ContentScale.Crop,
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .height(150.dp)
-                        .fillMaxWidth()
-                        .border(2.dp, color = Color.Blue, shape = RoundedCornerShape(10.dp))
-                )*/
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(" ${retrieveRestaurantName(userFav!!.restaurantId, restaurant)}",
-                    modifier= Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.headlineSmall)
-                Spacer(modifier = Modifier.height(8.dp))
-                Button(
-                    onClick = {
-                        navController.navigate(
-                            "${Routes.Recur.route}/" +
-                            "${retrieveFoodName(userFav.foodId, foodList)}/" +
-                                "${retrieveFoodPrice(userFav.foodId,foodList)}/" +
-                                "${retrieveRestaurantName(userFav.restaurantId, restaurant)}/" +
-                                retrieveImage(userFav.foodId, foodList)
-                                //"${retrieveFoodName(userFav.foodId, foodList)}/" +
-                                //"${retrieveFoodPrice(userFav.foodId,foodList)}/" +
-                                //"${retrieveRestaurantName(userFav.restaurantId, restaurant)}/" +
-                                //retrieveImage(userFav.foodId, foodList)
-                        )},
-                    modifier= Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .padding(16.dp)
-                ) {
-                    Text("Set Recurring")
-                }
+    @Composable
+    fun ExpandableFoodItem(
+        userFav: UserFavourite?,
+        navController: NavHostController, restaurant:
+        List<Restaurant?>,
+        foodList: List<Food?>){
+        var isExpanded by remember { mutableStateOf(false) }
+        ElevatedCard(
+            modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth()
+                .wrapContentHeight(align = Alignment.Top),
+            colors = CardDefaults.cardColors(CoolGrey),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)) {
+            if(!isExpanded) {
+                UnexpandedCard(isExpanded,userFav, foodList, onItemClick = {isExpanded = it})
+            } else{
+                ExpandedCard(navController,restaurant, userFav, foodList, onItemClick = {isExpanded = it}, isExpanded)
             }
         }
     }
+
+    @Composable
+    fun UnexpandedCard(
+        isExpanded: Boolean,
+        userFav: UserFavourite?,
+        foodList: List<Food?>,
+        onItemClick: (Boolean) -> Unit){
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start) {
+            ProfilePictureUnexpanded(userFav, foodList)
+            Column {
+                Text(text = retrieveFoodName(userFav!!.foodId, foodList),
+                    style = MaterialTheme.typography.headlineSmall)
+                Text(text = "$${retrieveFoodPrice(userFav.foodId, foodList).formatToTwoDecimalPlaces()}",
+                    style = MaterialTheme.typography.titleMedium)
+            }
+                Icon(
+                    modifier = Modifier
+                        .padding(start = 8.dp)
+                        .clickable {
+                            onItemClick(!isExpanded)
+                        },
+                    imageVector = Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Arrow Down" )
+        }
+    }
+
+    @Composable
+    fun ExpandedCard(
+        navController: NavHostController,
+        restaurant: List<Restaurant?>,
+        userFav: UserFavourite?,
+        foodList: List<Food?>,
+        onItemClick: (Boolean) -> Unit,
+        isExpanded: Boolean
+    ){
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally){
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(horizontalArrangement = Arrangement.Center){
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ){
+                    Text(text = retrieveFoodName(userFav!!.foodId, foodList),
+                    style = MaterialTheme.typography.headlineSmall,)
+                    Text(text = "$${retrieveFoodPrice(userFav.foodId, foodList).formatToTwoDecimalPlaces()}",
+                        style = MaterialTheme.typography.titleLarge,)}
+                Icon(
+                    modifier = Modifier
+                        .padding(vertical = 24.dp )
+                        .clickable {
+                            onItemClick(!isExpanded)
+                        },
+                    imageVector = Icons.Default.KeyboardArrowUp,
+                    contentDescription = "Arrow Down" )
+            }
+            ProfilePicture(userFav, foodList)
+
+            if (userFav != null) {
+                Text(" ${retrieveRestaurantName(userFav.restaurantId, restaurant)}",
+                    modifier= Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.headlineSmall)
+            }
+
+            Button(
+                colors = ButtonDefaults.buttonColors(PartyPink),
+                onClick = {
+                    if (userFav != null) {
+                        navController.navigate(
+                            "${Routes.Recur.route}/" +
+                                "${retrieveFoodName(userFav.foodId, foodList)}/" +
+                                "${retrieveFoodPrice(userFav.foodId,foodList)}/" +
+                                "${retrieveRestaurantName(userFav.restaurantId, restaurant)}/" +
+                                URLEncoder.encode(retrieveImage(userFav.foodId, foodList),StandardCharsets.UTF_8.toString() )
+
+                        )
+                    }
+                },
+                modifier= Modifier
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text("Set Recurring")
+            }
+        }
+    }
+
     @Composable
     fun ProfilePicture(userFav: UserFavourite?, foodList: List<Food?>){
         var imageUrl: String
+            Card(
+                modifier = Modifier.padding(24.dp),
+                shape = CircleShape,
+            border = BorderStroke(2.dp, color = PartyPink),
+        ) {
+            imageUrl = retrieveImage(userFav!!.foodId, foodList)
+            AsyncImage(
+                model = imageUrl,
+                contentDescription = null,
+                modifier = Modifier.size(200.dp),
+                contentScale = ContentScale.Crop)
+        }
+    }
+}
+    @Composable
+    fun ProfilePictureUnexpanded(userFav: UserFavourite?, foodList: List<Food?>){
+        var imageUrl: String
         Card(shape = CircleShape,
-            border = BorderStroke(2.dp, color = Color.Blue),
+            border = BorderStroke(2.dp, color = PartyPink),
             modifier = Modifier.padding(16.dp)
         ) {
             imageUrl = retrieveImage(userFav!!.foodId, foodList)
-                AsyncImage(model = imageUrl, contentDescription = null)
-            }
+            AsyncImage(
+                model = imageUrl,
+                contentDescription = null,
+                modifier = Modifier.size(72.dp),
+                contentScale = ContentScale.Crop)
         }
     }
 
     private fun retrieveImage(id: Int, foodList:List<Food?>): String{
     foodList.forEach{
                 item-> if(id == item!!.foodId){
-        return if(item.foodImage == "") "no image" else item.foodImage
+        return if(item.foodImage == "") {
+            "no image"} else {
+                item.foodImage
+        }
                 }
         }
-        return ""
+        return "no image"
     }
 
     private fun retrieveFoodName(id: Int, foodList:List<Food?>): String{

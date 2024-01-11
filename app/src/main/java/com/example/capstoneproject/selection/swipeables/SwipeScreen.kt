@@ -88,11 +88,15 @@ fun SwipeCards(capstoneViewModel: CapstoneViewModel,
                                             // swipes are handled by the LaunchedEffect
                                             // so that we track button clicks & swipes
                                             // from the same place
+                                            if(state.swipedDirection == Direction.Right)
                                                    capstoneViewModel.viewModelScope.launch {
-                                                       capstoneViewModel.insertUserFav(UserFavourite(user!!.userId,
-                                                           matchFood.restaurantId,matchFood.foodId))
+                                                       capstoneViewModel.insertUserFav(
+                                                           UserFavourite(
+                                                               user!!.userId,
+                                                               matchFood.restaurantId, matchFood.foodId
+                                                           )
+                                                       )
                                                    }
-
                                         },
                                         onSwipeCancel = {
                                             Log.d("Swipeable-Card", "Cancelled swipe")
