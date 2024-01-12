@@ -26,7 +26,7 @@ class PageNavigators {
         restaurantList: List<Restaurant?>,
         foodList: List<Food?>,
         userFav: List<UserFavourite?>,
-    )  {
+    ) {
         val navigationController = rememberNavController()
         NavHost(
             navController = navigationController,
@@ -69,12 +69,14 @@ class PageNavigators {
             }
             composable(
                 "${Routes.Recur.route}/{foodName}/" +
-                    "{foodPrice}/{restaurant}/{image}",
+                    "{foodPrice}/{restaurant}/{image}/{favId}",
                 arguments =
                     listOf(
                         navArgument("foodName") { type = NavType.StringType },
                         navArgument("foodPrice") { type = NavType.FloatType },
                         navArgument("restaurant") { type = NavType.StringType },
+                        navArgument("image") { type = NavType.StringType },
+                        navArgument("favId") { type = NavType.IntType },
                     ),
             ) {
                     backstackEntry ->
@@ -82,13 +84,16 @@ class PageNavigators {
                 val foodPrice = backstackEntry.arguments?.getFloat("foodPrice")?.toDouble()
                 val restaurant = backstackEntry.arguments?.getString("restaurant")
                 val image = backstackEntry.arguments?.getString("image") ?: ""
+                val favId = backstackEntry.arguments?.getInt("favId")
 
                 PageComposable().ToRecur(
+                    capstoneViewModel,
                     navigationController,
                     foodName,
                     foodPrice,
                     restaurant,
                     image,
+                    favId,
                 )
             }
             composable(Routes.Insert.route) {

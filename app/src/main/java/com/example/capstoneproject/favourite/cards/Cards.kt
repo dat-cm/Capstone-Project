@@ -139,7 +139,11 @@ fun ExpandedCard(
                             "${foodNameDataFinder(userFav.foodId, foodList)}/" +
                             "${foodPriceDataFinder(userFav.foodId,foodList)}/" +
                             "${restaurantNameDataFinder(userFav.restaurantId, restaurant)}/" +
-                            URLEncoder.encode(imageDataFinder(userFav.foodId, foodList), StandardCharsets.UTF_8.toString()),
+                            URLEncoder.encode(
+                                imageDataFinder(userFav.foodId, foodList),
+                                StandardCharsets.UTF_8
+                                    .toString(),
+                            ) + "/${userFav.favId}",
                     )
                 }
             },
@@ -153,13 +157,14 @@ fun ExpandedCard(
     }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun ExpandableFoodItem(
     userFav: UserFavourite?,
     navController: NavHostController,
     restaurant: List<Restaurant?>,
     foodList: List<Food?>,
-)  {
+) {
     var isExpanded by remember { mutableStateOf(false) }
     ElevatedCard(
         modifier =

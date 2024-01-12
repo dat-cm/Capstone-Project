@@ -1,5 +1,6 @@
 package com.example.capstoneproject.recurring
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,23 +38,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.decimal.formatToTwoDecimalPlaces
 import com.example.capstoneproject.navigator.Routes
 import com.example.capstoneproject.recurring.daypicker.DayPicker
 import com.example.capstoneproject.recurring.timepicker.TimePicker
 import com.example.capstoneproject.ui.theme.PartyPink
+import kotlinx.coroutines.launch
 
 @Suppress("ktlint:standard:function-naming")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RecurringUI(
+    capstoneViewModel: CapstoneViewModel,
     navController: NavHostController,
     foodName: String?,
     foodPrice: Double?,
     restaurant: String?,
     image: String?,
+    favId: Int?,
 ) {
     var selectedTime by remember { mutableStateOf("") }
     var selectedDays by remember { mutableStateOf<List<String>>(emptyList()) }
@@ -151,7 +157,18 @@ fun RecurringUI(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Button(
+                    enabled = selectedTime != "" && selectedDays.isNotEmpty(),
                     onClick = {
+                        Log.i("id", favId.toString())
+                        Log.i("selected time", selectedTime)
+                        selectedDays.forEach {
+                                day ->
+                            Log.i("day", day)
+                        }
+
+                        capstoneViewModel.viewModelScope.launch {
+                            capstoneViewModel.updateRecurrence(favId!!, true, selectedTime, selectedDays)
+                        }
                         // Handle Confirm Button
                         navController.navigate(Routes.Home.route)
                     },

@@ -22,9 +22,9 @@ fun TimePicker(onTimeSelected: (String) -> Unit) {
         Text(
             text = "Time picked is ${
                 if (myState.hour >= 12) {
-                    "${myState.hour % 12}:${String.format("%02d", myState.minute)} PM"
+                    onTimeSelected("${myState.hour % 12}:${String.format("%02d", myState.minute)} PM")
                 } else {
-                    "${myState.hour}:${String.format("%02d", myState.minute)} AM"
+                    onTimeSelected("${myState.hour}:${String.format("%02d", myState.minute)} AM")
                 }
             }",
         )

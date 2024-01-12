@@ -83,18 +83,22 @@ class PageComposable {
 
     @Composable
     fun ToRecur(
+        capstoneViewModel: CapstoneViewModel,
         navController: NavHostController,
         foodName: String?,
         foodPrice: Double?,
         restaurant: String?,
         image: String?,
+        favId: Int?,
     ) {
         return RecurringUI(
+            capstoneViewModel,
             navController,
             foodName,
             foodPrice,
             restaurant,
             image,
+            favId,
         )
     }
 
