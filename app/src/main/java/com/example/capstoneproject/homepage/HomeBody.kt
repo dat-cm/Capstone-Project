@@ -14,41 +14,36 @@ import com.example.capstoneproject.homepage.card.PandamartGrid
 import com.example.capstoneproject.homepage.card.PickupGrid
 import com.example.capstoneproject.homepage.card.ShopsGrid
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
-fun HomeBody(){
+fun HomeBody()  {
     Row(
-        modifier = Modifier
-            .padding(top = 16.dp, start = 8.dp, bottom =  16.dp),){
+        modifier =
+            Modifier
+                .padding(top = 16.dp, start = 8.dp, bottom = 16.dp),
+    ) {
         Column(
             horizontalAlignment = Alignment.Start,
         ) {
-            //food delivery grid
+            // food delivery grid
             FoodDeliveryGrid()
 
-            //pickup
+            // pickup
             PickupGrid()
 
-            //panda-go
+            // panda-go
             PandaGoGrid()
         }
 
-        Column{
-            //pandamart
+        Column {
+            // pandamart
             PandamartGrid()
 
-            //shops
+            // shops
             ShopsGrid()
 
-            //dine in
+            // dine in
             DineInGrid()
         }
     }
 }
-
-
-
-
-
-
-
-

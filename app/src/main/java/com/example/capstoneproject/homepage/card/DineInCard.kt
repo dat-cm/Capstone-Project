@@ -20,42 +20,52 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.capstoneproject.R
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun DineInGrid() {
     Card(
-        modifier = Modifier
-            .width(180.dp)
-            .height(85.dp)
-            .padding(
-                end = 8.dp,
-                bottom = 8.dp
+        modifier =
+            Modifier
+                .width(180.dp)
+                .height(85.dp)
+                .padding(
+                    end = 8.dp,
+                    bottom = 8.dp,
+                ),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = Color.White,
             ),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 1.dp)
-    ){
-        Row{
+        elevation =
+            CardDefaults.cardElevation(
+                defaultElevation = 1.dp,
+            ),
+    ) {
+        Row {
             Column(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 8.dp, end = 16.dp)
+                modifier =
+                    Modifier
+                        .padding(start = 16.dp, top = 8.dp, end = 16.dp),
             ) {
-                Text("Dine-in",
+                Text(
+                    "Dine-in",
                     fontWeight = FontWeight.Bold,
                     fontSize = 22.sp,
-                    modifier = Modifier.background(Color.White))
-                Text("Up to 50% off...",
+                    modifier = Modifier.background(Color.White),
+                )
+                Text(
+                    "Up to 50% off...",
                     fontSize = 14.sp,
-                    lineHeight = 18.sp)
+                    lineHeight = 18.sp,
+                )
             }
             Image(
                 painter = painterResource(id = R.drawable.dinein),
                 contentDescription = "pickup",
-                modifier = Modifier
-                    .size(500.dp),
+                modifier =
+                    Modifier
+                        .size(500.dp),
             )
         }
-
     }
 }

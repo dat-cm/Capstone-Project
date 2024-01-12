@@ -20,39 +20,50 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.capstoneproject.R
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun PandamartGrid() {
     Card(
-        modifier = Modifier
-            .width(180.dp)
-            .height(180.dp)
-            .padding(
-                end = 8.dp,
-                bottom = 8.dp
+        modifier =
+            Modifier
+                .width(180.dp)
+                .height(180.dp)
+                .padding(
+                    end = 8.dp,
+                    bottom = 8.dp,
+                ),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = Color.White,
             ),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 1.dp)
-    ){
+        elevation =
+            CardDefaults.cardElevation(
+                defaultElevation = 1.dp,
+            ),
+    ) {
         Column(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 8.dp, end = 16.dp)
+            modifier =
+                Modifier
+                    .padding(start = 16.dp, top = 8.dp, end = 16.dp),
         ) {
-            Text("pandamart",
+            Text(
+                "pandamart",
                 fontWeight = FontWeight.Bold,
                 fontSize = 22.sp,
-                modifier = Modifier.background(Color.White))
-            Text("Fresh groceries & more",
+                modifier = Modifier.background(Color.White),
+            )
+            Text(
+                "Fresh groceries & more",
                 fontSize = 14.sp,
-                lineHeight = 18.sp)
+                lineHeight = 18.sp,
+            )
             Image(
                 painter = painterResource(id = R.drawable.pandamart),
                 contentDescription = "pickup",
-                modifier = Modifier
-                    .size(500.dp),
-                contentScale = ContentScale.Fit
+                modifier =
+                    Modifier
+                        .size(500.dp),
+                contentScale = ContentScale.Fit,
             )
         }
     }

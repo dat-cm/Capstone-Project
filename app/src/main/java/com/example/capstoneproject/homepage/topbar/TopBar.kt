@@ -1,3 +1,4 @@
+
 package com.example.capstoneproject.homepage.topbar
 
 import androidx.compose.foundation.layout.Column
@@ -25,33 +26,43 @@ import com.example.capstoneproject.ui.theme.PartyPink
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@Suppress("ktlint:standard:function-naming")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(scope: CoroutineScope, drawerState : DrawerState){
+fun TopBar(
+    scope: CoroutineScope,
+    drawerState: DrawerState,
+) {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(containerColor = PartyPink),
         navigationIcon = {
             IconButton(onClick = {
-                scope.launch{
-                    drawerState.apply{
-                        if(isClosed) open() else close()
+                scope.launch {
+                    drawerState.apply {
+                        if (isClosed) open() else close()
                     }
                 }
             }) {
                 Icon(
                     imageVector = Icons.Default.Menu,
                     contentDescription = "Menu",
-                    tint = Color.White
+                    tint = Color.White,
                 )
             }
         },
-        title =  {
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 8.dp)) {
-                Text("Company", fontSize = 20.sp,
+        title = {
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(start = 8.dp),
+            ) {
+                Text(
+                    "Company",
+                    fontSize = 20.sp,
                     color = Color.White,
-                    fontWeight = FontWeight.Bold)
+                    fontWeight = FontWeight.Bold,
+                )
                 Text(
                     "Afro Asia Building, Afro Asia Building, " +
                         "63 Robinson Rd, Singapore 068894 Singapore, 068894",
@@ -59,7 +70,7 @@ fun TopBar(scope: CoroutineScope, drawerState : DrawerState){
                     modifier = Modifier.fillMaxWidth(),
                     fontSize = 14.sp,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
             }
         },
@@ -68,14 +79,14 @@ fun TopBar(scope: CoroutineScope, drawerState : DrawerState){
                 Icon(
                     imageVector = Icons.Default.FavoriteBorder,
                     contentDescription = "Fav",
-                    tint = Color.White
+                    tint = Color.White,
                 )
             }
             IconButton(onClick = {}) {
                 Icon(
                     imageVector = Icons.Outlined.ShoppingCart,
                     contentDescription = "Bag",
-                    tint = Color.White
+                    tint = Color.White,
                 )
             }
         },

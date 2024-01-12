@@ -27,7 +27,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,33 +52,39 @@ import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.data.foodChoiceList
 import kotlinx.coroutines.launch
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
-fun SwipeCards(capstoneViewModel: CapstoneViewModel,
-               user: User?,
-               userPref: UserPreferences?,
-               restaurantList: List<Restaurant?>,
-               foodList: List<Food?>) {
+fun SwipeCards(
+    capstoneViewModel: CapstoneViewModel,
+    user: User?,
+    userPref: UserPreferences?,
+    restaurantList: List<Restaurant?>,
+    foodList: List<Food?>,
+) {
     createFoodProfiles(userPref, restaurantList, foodList)
     Column {
-            Box {
-                val states = foodChoiceList.reversed()
+        Box {
+            val states =
+                foodChoiceList.reversed()
                     .map { it to rememberSwipeableCardState() }
-                var hint by remember {
-                    mutableStateOf("Swipe a card or press a button below")
-                }
+            var hint by remember {
+                mutableStateOf("Swipe a card or press a button below")
+            }
 
-                Hint(hint)
+            Hint(hint)
 
-                Box(
-                    Modifier
-                        .padding(24.dp)
-                        .fillMaxSize()
-                        .aspectRatio(1f)
-                        .align(Alignment.Center)) {
-                    states.forEach { (matchFood, state) ->
-                        if (state.swipedDirection == null) {
-                            FoodCard(
-                                modifier = Modifier
+            Box(
+                Modifier
+                    .padding(24.dp)
+                    .fillMaxSize()
+                    .aspectRatio(1f)
+                    .align(Alignment.Center),
+            ) {
+                states.forEach { (matchFood, state) ->
+                    if (state.swipedDirection == null) {
+                        FoodCard(
+                            modifier =
+                                Modifier
                                     .fillMaxSize()
                                     .swipableCard(
                                         state = state,
@@ -88,86 +93,96 @@ fun SwipeCards(capstoneViewModel: CapstoneViewModel,
                                             // swipes are handled by the LaunchedEffect
                                             // so that we track button clicks & swipes
                                             // from the same place
-                                            if(state.swipedDirection == Direction.Right)
-                                                   capstoneViewModel.viewModelScope.launch {
-                                                       capstoneViewModel.insertUserFav(
-                                                           UserFavourite(
-                                                               user!!.userId,
-                                                               matchFood.restaurantId, matchFood.foodId
-                                                           )
-                                                       )
-                                                   }
+                                            if (state.swipedDirection == Direction.Right) {
+                                                capstoneViewModel.viewModelScope.launch {
+                                                    capstoneViewModel.insertUserFav(
+                                                        UserFavourite(
+                                                            user!!.userId,
+                                                            matchFood.restaurantId,
+                                                            matchFood.foodId,
+                                                        ),
+                                                    )
+                                                }
+                                            }
                                         },
                                         onSwipeCancel = {
                                             Log.d("Swipeable-Card", "Cancelled swipe")
                                             hint = "You canceled the swipe"
-                                        }
+                                        },
                                     ),
-                                matchFood = matchFood
-                            )
-                        }
-                        LaunchedEffect(matchFood, state.swipedDirection) {
-                            if (state.swipedDirection != null) {
-                                hint = "You swiped ${stringFrom(state.swipedDirection!!)}"
-                            }
+                            matchFood = matchFood,
+                        )
+                    }
+                    LaunchedEffect(matchFood, state.swipedDirection) {
+                        if (state.swipedDirection != null) {
+                            hint = "You swiped ${stringFrom(state.swipedDirection!!)}"
                         }
                     }
                 }
-                Row(
-                    Modifier
-                        .align(Alignment.BottomCenter)
-                        .padding(horizontal = 24.dp, vertical = 32.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    CircleButton(
-                        onClick = {
-                            capstoneViewModel.viewModelScope.launch {
-                                val last = states.reversed()
+            }
+            Row(
+                Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(horizontal = 24.dp, vertical = 32.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+            ) {
+                CircleButton(
+                    onClick = {
+                        capstoneViewModel.viewModelScope.launch {
+                            val last =
+                                states.reversed()
                                     .firstOrNull {
                                         it.second.offset.value == Offset(0f, 0f)
                                     }?.second
-                                last?.swipe(Direction.Left)
-                            }
-                        },
-                        icon = Icons.Rounded.Close
-                    )
-                    CircleButton(
-                        onClick = {
-                            capstoneViewModel.viewModelScope.launch {
-                                val last = states.reversed()
+                            last?.swipe(Direction.Left)
+                        }
+                    },
+                    icon = Icons.Rounded.Close,
+                )
+                CircleButton(
+                    onClick = {
+                        capstoneViewModel.viewModelScope.launch {
+                            val last =
+                                states.reversed()
                                     .firstOrNull {
                                         it.second.offset.value == Offset(0f, 0f)
                                     }?.second
 
-                                last?.swipe(Direction.Right)
-                            }
-                        },
-                        icon = Icons.Rounded.Favorite
-                    )
-                }
+                            last?.swipe(Direction.Right)
+                        }
+                    },
+                    icon = Icons.Rounded.Favorite,
+                )
             }
         }
+    }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 private fun CircleButton(
     onClick: () -> Unit,
     icon: ImageVector,
 ) {
     IconButton(
-        modifier = Modifier
-            .clip(CircleShape)
-            .background(MaterialTheme.colorScheme.primary)
-            .size(56.dp)
-            .border(2.dp, MaterialTheme.colorScheme.primary, CircleShape),
-        onClick = onClick
+        modifier =
+            Modifier
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.primary)
+                .size(56.dp)
+                .border(2.dp, MaterialTheme.colorScheme.primary, CircleShape),
+        onClick = onClick,
     ) {
-        Icon(icon, null,
-            tint = MaterialTheme.colorScheme.onPrimary)
+        Icon(
+            icon,
+            null,
+            tint = MaterialTheme.colorScheme.onPrimary,
+        )
     }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 private fun FoodCard(
     modifier: Modifier,
@@ -175,36 +190,42 @@ private fun FoodCard(
 ) {
     Card(modifier) {
         Box {
-            AsyncImage(contentScale = ContentScale.Crop,
+            AsyncImage(
+                contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize(),
                 model = matchFood.foodImage,
-                contentDescription = null)
+                contentDescription = null,
+            )
             Scrim(Modifier.align(Alignment.BottomCenter))
             Column(Modifier.align(Alignment.BottomStart)) {
-                Text(text = matchFood.foodName,
+                Text(
+                    text = matchFood.foodName,
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Medium,
-                    modifier = Modifier.padding(10.dp))
+                    modifier = Modifier.padding(10.dp),
+                )
             }
         }
     }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 private fun Hint(text: String) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .padding(horizontal = 24.dp, vertical = 32.dp)
-            .fillMaxWidth()
+        modifier =
+            Modifier
+                .padding(horizontal = 24.dp, vertical = 32.dp)
+                .fillMaxWidth(),
     ) {
         Text(
             text = text,
             color = MaterialTheme.colorScheme.onPrimary,
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
     }
 }
@@ -218,12 +239,13 @@ private fun stringFrom(direction: Direction): String {
     }
 }
 
-
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun Scrim(modifier: Modifier = Modifier) {
     Box(
         modifier
             .background(Brush.verticalGradient(listOf(Color.Transparent, Color.Black)))
             .height(180.dp)
-            .fillMaxWidth())
+            .fillMaxWidth(),
+    )
 }

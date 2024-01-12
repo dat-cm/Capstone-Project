@@ -21,41 +21,52 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.capstoneproject.R
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun PandaGoGrid() {
     Card(
-        modifier = Modifier
-            .width(200.dp)
-            .height(85.dp)
-            .padding(
-                end = 8.dp,
-                bottom = 8.dp
+        modifier =
+            Modifier
+                .width(200.dp)
+                .height(85.dp)
+                .padding(
+                    end = 8.dp,
+                    bottom = 8.dp,
+                ),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = Color.White,
             ),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 1.dp)
-    ){
-        Row{
+        elevation =
+            CardDefaults.cardElevation(
+                defaultElevation = 1.dp,
+            ),
+    ) {
+        Row {
             Column(
-                modifier = Modifier
-                    .padding(start = 16.dp, top = 8.dp, end = 16.dp)
+                modifier =
+                    Modifier
+                        .padding(start = 16.dp, top = 8.dp, end = 16.dp),
             ) {
-                Text("pandago",
+                Text(
+                    "pandago",
                     fontWeight = FontWeight.Bold,
                     fontSize = 22.sp,
-                    modifier = Modifier.background(Color.White))
-                Text("Send parcels",
+                    modifier = Modifier.background(Color.White),
+                )
+                Text(
+                    "Send parcels",
                     fontSize = 14.sp,
-                    lineHeight = 18.sp)
+                    lineHeight = 18.sp,
+                )
             }
             Image(
                 painter = painterResource(id = R.drawable.pandago),
                 contentDescription = "pickup",
-                modifier = Modifier
-                    .size(500.dp),
-                contentScale = ContentScale.Fit
+                modifier =
+                    Modifier
+                        .size(500.dp),
+                contentScale = ContentScale.Fit,
             )
         }
     }
