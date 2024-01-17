@@ -38,6 +38,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -71,6 +72,7 @@ fun SwipeCard(
     var foodState by remember {
         mutableStateOf(Food("", 0.00, "", "", 1))
     }
+    val context = LocalContext.current
     createFoodProfiles(userPref, restaurantList, foodList, userFav)
     val states: List<Pair<Food, SwipeableCardState>> =
         foodChoiceList.reversed()
@@ -102,6 +104,7 @@ fun SwipeCard(
                                         // from the same place
                                         if (state.swipedDirection == Direction.Right) {
                                             viewModel.saveSwipeCard(user, matchFood)
+                                            showToast(context, "Added to Favourite")
                                         }
                                     },
                                     onSwipeCancel = {
@@ -135,16 +138,8 @@ fun SwipeCard(
                     viewModel.saveSwipeCard(user, foodState)
                     scope.launch {
                         states.reversed().firstOrNull { it.second.offset.value == Offset(0f, 0f) }?.second?.swipe(Direction.Right)
+                        showToast(context, "Added to Favourite")
                     }
-                    /*capstoneViewModel.viewModelScope.launch {
-                        val last =
-                            states.reversed()
-                                .firstOrNull {
-                                    it.second.offset.value == Offset(0f, 0f)
-                                }?.second
-
-                        last?.swipe(Direction.Right)
-                    }*/
                 },
                 icon = Icons.Rounded.Favorite,
             )
@@ -241,4 +236,11 @@ fun Scrim(modifier: Modifier = Modifier) {
             .height(180.dp)
             .fillMaxWidth(),
     )
+}
+
+fun showToast(
+    context: android.content.Context,
+    message: String,
+) {
+    android.widget.Toast.makeText(context, message, android.widget.Toast.LENGTH_SHORT).show()
 }
