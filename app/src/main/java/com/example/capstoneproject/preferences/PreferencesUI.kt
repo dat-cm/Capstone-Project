@@ -1,7 +1,6 @@
 package com.example.capstoneproject.preferences
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -23,22 +22,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.user.User
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.data.insert.addToListForInsert
 import com.example.capstoneproject.navigator.Routes
-import com.example.capstoneproject.preferences.multiselect.multiSelectForHalalOrNonHalal
-import com.example.capstoneproject.preferences.multiselect.multiSelectForVegetarianOrVegan
+import com.example.capstoneproject.preferences.multiselect.multiSelectionFoodClassification
 import com.example.capstoneproject.preferences.selector.selectUserClassification
 import com.example.capstoneproject.preferences.slider.budgetSlider
 import com.example.capstoneproject.ui.theme.PartyPink
-import kotlinx.coroutines.launch
 
 @Suppress("ktlint:standard:function-naming")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,6 +46,7 @@ fun PreferencesUI(
     var userClassification by remember { mutableStateOf("") }
     var userFoodPreferences = remember { mutableStateListOf("") }
     var userBudget by remember { mutableIntStateOf(0) }
+    val viewModel = PreferencesViewModel(capstoneViewModel)
 
     Scaffold(
         topBar = {
@@ -89,27 +84,9 @@ fun PreferencesUI(
             userClassification = selectUserClassification(userPref?.userClassification ?: "")
             if (userClassification != "") {
                 FoodPreferenceChoiceTextUI()
-                when (userClassification) {
-                    "Halal", "Non-Halal", "No Preference" ->
-                        userFoodPreferences = multiSelectForHalalOrNonHalal(userPref?.userFoodClassification ?: emptyList())
-
-                    "Vegan/Vegetarian" ->
-                        userFoodPreferences = multiSelectForVegetarianOrVegan(userPref?.userFoodClassification ?: emptyList())
-                }
+                userFoodPreferences = multiSelectionFoodClassification(userClassification, userPref?.userFoodClassification ?: emptyList())
                 if (userFoodPreferences.isNotEmpty()) {
-                    Row {
-                        Text(
-                            "Budget:",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(end = 16.dp),
-                        )
-
-                        Text(
-                            "$$userBudget",
-                            fontSize = 20.sp,
-                        )
-                    }
+                    BudgetTextUI(userBudget)
                     userBudget = budgetSlider(userPref?.userBudget?.toInt() ?: 0)
                 }
             }
@@ -122,34 +99,13 @@ fun PreferencesUI(
                         .padding(top = 40.dp),
                 colors = ButtonDefaults.buttonColors(PartyPink),
                 onClick = {
-                    var userFoodPreferencesList: ArrayList<String>
-                    capstoneViewModel.viewModelScope.launch {
-                        userFoodPreferencesList = addToListForInsert(userFoodPreferences)
-                        if (user != null) {
-                            if (userPref != null) {
-                                capstoneViewModel.updateAllUserPreferences(
-                                    UserPreferences(
-                                        user.userId,
-                                        userClassification,
-                                        userFoodPreferencesList,
-                                        userBudget.toDouble(),
-                                    ),
-                                )
-                            } else {
-                                capstoneViewModel.insertUserPref(
-                                    UserPreferences(
-                                        user.userId,
-                                        userClassification,
-                                        userFoodPreferencesList,
-                                        userBudget.toDouble(),
-                                    ),
-                                )
-                                if (!user.userPref) {
-                                    capstoneViewModel.updateUserPref(true)
-                                }
-                            }
-                        }
-                    }
+                    viewModel.saveUserPreferences(
+                        user,
+                        userPref,
+                        userClassification,
+                        addToListForInsert(userFoodPreferences),
+                        userBudget.toDouble(),
+                    )
                     navController.navigate(Routes.Selection.route)
                 },
             ) {

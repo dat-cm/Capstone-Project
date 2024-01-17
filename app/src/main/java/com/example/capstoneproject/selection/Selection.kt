@@ -25,7 +25,7 @@ import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.navigator.Routes
-import com.example.capstoneproject.selection.swipeables.SwipeCards
+import com.example.capstoneproject.selection.swipeables.SwipeCard
 import com.example.capstoneproject.ui.theme.PartyPink
 
 @Suppress("ktlint:standard:function-naming")
@@ -39,7 +39,7 @@ fun SelectionUI(
     userPref: UserPreferences?,
     restaurantList: List<Restaurant?>,
     foodList: List<Food?>,
-)  {
+) {
     Scaffold(
         topBar = {
             Surface(
@@ -77,6 +77,7 @@ fun SelectionUI(
             }
         },
     ) {
-        SwipeCards(capstoneViewModel, user, userPref, restaurantList, foodList)
+            paddingValues ->
+        SwipeCard(capstoneViewModel, user, userPref, restaurantList, foodList, paddingValues)
     }
 }

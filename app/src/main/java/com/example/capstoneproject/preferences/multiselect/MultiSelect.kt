@@ -14,27 +14,49 @@ import com.example.capstoneproject.data.converters.convertToSnapshotStateList
 import com.example.capstoneproject.preferences.selector.CheckboxItem
 
 @Composable
-fun multiSelectForHalalOrNonHalal(userFoodClassification: List<String>) : SnapshotStateList<String> {
-    val options = listOf(
-        "Meat",
-        "Rice",
-        "Dessert",
-        "Noodles",
-        "Seafood",
-        "Fast food",
-    )
-    var selectedOptions: SnapshotStateList<String> = remember { mutableStateListOf() }
-    if(userFoodClassification.isNotEmpty()) {
-        selectedOptions = remember {
-            convertToSnapshotStateList(userFoodClassification, options)
-        }
+fun multiSelectionFoodClassification(
+    userClassification: String,
+    userFoodClassification: List<String>,
+): SnapshotStateList<String> {
+    var options = listOf<String>()
+    when (userClassification) {
+        "Halal", "Non-Halal", "No Preference" ->
+            options =
+                listOf(
+                    "Meat",
+                    "Rice",
+                    "Dessert",
+                    "Noodles",
+                    "Seafood",
+                    "Fast food",
+                )
+
+        "Vegan/Vegetarian" ->
+            options =
+                listOf(
+                    "Rice",
+                    "Soup",
+                    "Salad",
+                    "Dessert",
+                    "Noodles",
+                    "Fast food",
+                )
     }
 
+    var selectedOptions: SnapshotStateList<String> = remember { mutableStateListOf() }
+    if (userFoodClassification.isNotEmpty()) {
+        selectedOptions =
+            remember {
+                convertToSnapshotStateList(userFoodClassification, options)
+            }
+    }
     Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        modifier =
+            Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
         options.forEach { option ->
             CheckboxItem(
                 text = option,
@@ -45,46 +67,7 @@ fun multiSelectForHalalOrNonHalal(userFoodClassification: List<String>) : Snapsh
                     } else {
                         selectedOptions.remove(option)
                     }
-                }
-            )
-        }
-    }
-    return selectedOptions
-}
-
-@Composable
-fun multiSelectForVegetarianOrVegan(userFoodClassification: List<String>) : SnapshotStateList<String> {
-    val options = listOf(
-        "Rice",
-        "Soup",
-        "Salad",
-        "Dessert",
-        "Noodles",
-        "Fast food",
-    )
-    var selectedOptions: SnapshotStateList<String> = remember { mutableStateListOf() }
-    if(userFoodClassification.isNotEmpty()) {
-        selectedOptions = remember {
-            convertToSnapshotStateList(userFoodClassification, options)
-        }
-    }
-
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        options.forEach { option ->
-            CheckboxItem(
-                text = option,
-                isChecked = selectedOptions.contains(option),
-                onCheckedChange = { isChecked ->
-                    if (isChecked) {
-                        selectedOptions.add(option)
-                    } else {
-                        selectedOptions.remove(option)
-                    }
-                }
+                },
             )
         }
     }

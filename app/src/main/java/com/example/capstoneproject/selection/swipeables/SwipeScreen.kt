@@ -1,11 +1,11 @@
 package com.example.capstoneproject.selection.swipeables
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,10 +23,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,128 +40,116 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewModelScope
 import coil.compose.AsyncImage
 import com.example.capstoneproject.data.createFoodProfiles
 import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
-import com.example.capstoneproject.data.database.userfavourite.UserFavourite
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.data.foodChoiceList
+import com.example.capstoneproject.ui.theme.PartyPink
 import kotlinx.coroutines.launch
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun SwipeCards(
+fun SwipeCard(
     capstoneViewModel: CapstoneViewModel,
     user: User?,
     userPref: UserPreferences?,
     restaurantList: List<Restaurant?>,
     foodList: List<Food?>,
+    padding: PaddingValues,
 ) {
+    val viewModel = SwipeViewModel(capstoneViewModel)
+    val scope = rememberCoroutineScope()
+    var foodState by remember {
+        mutableStateOf(Food("", 0.00, "", "", 1))
+    }
     createFoodProfiles(userPref, restaurantList, foodList)
+    val states: List<Pair<Food, SwipeableCardState>> =
+        foodChoiceList.reversed()
+            .map { it to rememberSwipeableCardState() }
     Column {
-        Box {
-            val states =
-                foodChoiceList.reversed()
-                    .map { it to rememberSwipeableCardState() }
-            var hint by remember {
-                mutableStateOf("Swipe a card or press a button below")
-            }
-
-            Hint(hint)
-
-            Box(
+        Box(
+            modifier =
                 Modifier
-                    .padding(24.dp)
-                    .fillMaxSize()
-                    .aspectRatio(1f)
-                    .align(Alignment.Center),
-            ) {
-                states.forEach { (matchFood, state) ->
-                    if (state.swipedDirection == null) {
-                        FoodCard(
-                            modifier =
-                                Modifier
-                                    .fillMaxSize()
-                                    .swipableCard(
-                                        state = state,
-                                        blockedDirections = listOf(Direction.Down),
-                                        onSwiped = {
-                                            // swipes are handled by the LaunchedEffect
-                                            // so that we track button clicks & swipes
-                                            // from the same place
-                                            if (state.swipedDirection == Direction.Right) {
-                                                capstoneViewModel.viewModelScope.launch {
-                                                    capstoneViewModel.insertUserFav(
-                                                        UserFavourite(
-                                                            user!!.userId,
-                                                            matchFood.restaurantId,
-                                                            matchFood.foodId,
-                                                        ),
-                                                    )
-                                                }
-                                            }
-                                        },
-                                        onSwipeCancel = {
-                                            Log.d("Swipeable-Card", "Cancelled swipe")
-                                            hint = "You canceled the swipe"
-                                        },
-                                    ),
-                            matchFood = matchFood,
-                        )
-                    }
-                    LaunchedEffect(matchFood, state.swipedDirection) {
-                        if (state.swipedDirection != null) {
-                            hint = "You swiped ${stringFrom(state.swipedDirection!!)}"
-                        }
-                    }
+                    .padding(
+                        top = padding.calculateTopPadding() + 24.dp,
+                        start = 24.dp,
+                        end = 24.dp,
+                    )
+                    .aspectRatio(0.75f),
+        ) {
+            states.forEach { (matchFood, state) ->
+                if (state.swipedDirection == null) {
+                    FoodCard(
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .aspectRatio(1f)
+                                .swipableCard(
+                                    state = state,
+                                    blockedDirections = listOf(Direction.Down, Direction.Up),
+                                    onSwiped = {
+                                        // swipes are handled by the LaunchedEffect
+                                        // so that we track button clicks & swipes
+                                        // from the same place
+                                        if (state.swipedDirection == Direction.Right) {
+                                            viewModel.saveSwipeCard(user, matchFood)
+                                        }
+                                    },
+                                    onSwipeCancel = {
+                                        // Log.d("Swipeable-Card", "Cancelled swipe")
+                                        // hint = "You canceled the swipe"
+                                    },
+                                ),
+                        matchFood = matchFood,
+                    )
+                    foodState = matchFood
                 }
             }
-            Row(
-                Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(horizontal = 24.dp, vertical = 32.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-            ) {
-                CircleButton(
-                    onClick = {
-                        capstoneViewModel.viewModelScope.launch {
-                            val last =
-                                states.reversed()
-                                    .firstOrNull {
-                                        it.second.offset.value == Offset(0f, 0f)
-                                    }?.second
-                            last?.swipe(Direction.Left)
-                        }
-                    },
-                    icon = Icons.Rounded.Close,
-                )
-                CircleButton(
-                    onClick = {
-                        capstoneViewModel.viewModelScope.launch {
-                            val last =
-                                states.reversed()
-                                    .firstOrNull {
-                                        it.second.offset.value == Offset(0f, 0f)
-                                    }?.second
+        }
+        Row(
+            Modifier
+                .padding(horizontal = 24.dp, vertical = 32.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.Bottom,
+        ) {
+            CircleButton(
+                onClick = {
+                    scope.launch {
+                        states.reversed().firstOrNull { it.second.offset.value == Offset(0f, 0f) }?.second?.swipe(Direction.Left)
+                    }
+                },
+                icon = Icons.Rounded.Close,
+            )
+            CircleButton(
+                onClick = {
+                    viewModel.saveSwipeCard(user, foodState)
+                    scope.launch {
+                        states.reversed().firstOrNull { it.second.offset.value == Offset(0f, 0f) }?.second?.swipe(Direction.Right)
+                    }
+                    /*capstoneViewModel.viewModelScope.launch {
+                        val last =
+                            states.reversed()
+                                .firstOrNull {
+                                    it.second.offset.value == Offset(0f, 0f)
+                                }?.second
 
-                            last?.swipe(Direction.Right)
-                        }
-                    },
-                    icon = Icons.Rounded.Favorite,
-                )
-            }
+                        last?.swipe(Direction.Right)
+                    }*/
+                },
+                icon = Icons.Rounded.Favorite,
+            )
         }
     }
 }
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-private fun CircleButton(
+fun CircleButton(
     onClick: () -> Unit,
     icon: ImageVector,
 ) {
@@ -169,9 +157,9 @@ private fun CircleButton(
         modifier =
             Modifier
                 .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.primary)
+                .background(PartyPink)
                 .size(56.dp)
-                .border(2.dp, MaterialTheme.colorScheme.primary, CircleShape),
+                .border(2.dp, PartyPink, CircleShape),
         onClick = onClick,
     ) {
         Icon(
@@ -184,7 +172,7 @@ private fun CircleButton(
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-private fun FoodCard(
+fun FoodCard(
     modifier: Modifier,
     matchFood: Food,
 ) {
