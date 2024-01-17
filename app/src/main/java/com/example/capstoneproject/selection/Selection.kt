@@ -23,6 +23,7 @@ import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
+import com.example.capstoneproject.data.database.userfavourite.UserFavourite
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.navigator.Routes
 import com.example.capstoneproject.selection.swipeables.SwipeCard
@@ -39,6 +40,7 @@ fun SelectionUI(
     userPref: UserPreferences?,
     restaurantList: List<Restaurant?>,
     foodList: List<Food?>,
+    userFav: List<UserFavourite?>,
 ) {
     Scaffold(
         topBar = {
@@ -78,6 +80,6 @@ fun SelectionUI(
         },
     ) {
             paddingValues ->
-        SwipeCard(capstoneViewModel, user, userPref, restaurantList, foodList, paddingValues)
+        SwipeCard(capstoneViewModel, user, userPref, restaurantList, foodList, userFav, paddingValues)
     }
 }

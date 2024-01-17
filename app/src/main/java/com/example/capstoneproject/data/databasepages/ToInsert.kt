@@ -60,7 +60,7 @@ class ToInsert {
                 Button(
                     onClick = {
                         capstoneViewModel.viewModelScope.launch {
-                            val listCount: List<Int> = listOf(39)
+                            val listCount: List<Int> = listOf(55,56,57)
                             listCount.forEach {
                                     count ->
                                 capstoneViewModel.deleteUserFav(count)

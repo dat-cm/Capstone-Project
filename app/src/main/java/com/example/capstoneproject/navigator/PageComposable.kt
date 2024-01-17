@@ -45,6 +45,7 @@ class PageComposable {
         userPref: UserPreferences?,
         restaurantList: List<Restaurant?>,
         foodList: List<Food?>,
+        userFav: List<UserFavourite?>,
     ) {
         return SelectionUI(
             navController,
@@ -53,6 +54,7 @@ class PageComposable {
             userPref,
             restaurantList,
             foodList,
+            userFav,
         )
     }
 

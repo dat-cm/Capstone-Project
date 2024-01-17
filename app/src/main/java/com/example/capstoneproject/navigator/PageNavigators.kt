@@ -48,6 +48,7 @@ class PageNavigators {
                     userPref,
                     restaurantList,
                     foodList,
+                    userFav,
                 )
             }
             composable(Routes.Home.route) {

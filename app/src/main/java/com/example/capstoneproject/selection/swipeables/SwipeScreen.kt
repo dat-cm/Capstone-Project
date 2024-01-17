@@ -1,5 +1,7 @@
 package com.example.capstoneproject.selection.swipeables
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -46,11 +48,13 @@ import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.user.User
+import com.example.capstoneproject.data.database.userfavourite.UserFavourite
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 import com.example.capstoneproject.data.foodChoiceList
 import com.example.capstoneproject.ui.theme.PartyPink
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun SwipeCard(
@@ -59,6 +63,7 @@ fun SwipeCard(
     userPref: UserPreferences?,
     restaurantList: List<Restaurant?>,
     foodList: List<Food?>,
+    userFav: List<UserFavourite?>,
     padding: PaddingValues,
 ) {
     val viewModel = SwipeViewModel(capstoneViewModel)
@@ -66,7 +71,7 @@ fun SwipeCard(
     var foodState by remember {
         mutableStateOf(Food("", 0.00, "", "", 1))
     }
-    createFoodProfiles(userPref, restaurantList, foodList)
+    createFoodProfiles(userPref, restaurantList, foodList, userFav)
     val states: List<Pair<Food, SwipeableCardState>> =
         foodChoiceList.reversed()
             .map { it to rememberSwipeableCardState() }
