@@ -2,6 +2,7 @@ package com.example.capstoneproject.favourite
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -85,6 +86,7 @@ fun FavouriteUI(
                     fontSize = 24.sp,
                     textAlign = TextAlign.Center,
                 )
+                Spacer(modifier = Modifier.padding(top =  16.dp))
                 Button(
                     onClick = { navController.navigate(Routes.Selection.route) },
                     colors = ButtonDefaults.buttonColors(PartyPink),

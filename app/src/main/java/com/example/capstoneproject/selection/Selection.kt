@@ -6,6 +6,8 @@ This file is used to create UI for displaying "Food Subscriptions"
 package com.example.capstoneproject.selection
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Settings
@@ -19,6 +21,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.capstoneproject.data.createFoodProfiles
 import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
@@ -29,6 +32,7 @@ import com.example.capstoneproject.navigator.Routes
 import com.example.capstoneproject.selection.swipeables.SwipeCard
 import com.example.capstoneproject.ui.theme.PartyPink
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Suppress("ktlint:standard:function-naming")
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -80,6 +84,7 @@ fun SelectionUI(
         },
     ) {
             paddingValues ->
-        SwipeCard(capstoneViewModel, user, userPref, restaurantList, foodList, userFav, paddingValues)
+        createFoodProfiles(userPref, restaurantList, foodList, userFav)
+        SwipeCard(capstoneViewModel, user, navController, paddingValues)
     }
 }
