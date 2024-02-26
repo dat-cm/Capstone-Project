@@ -27,8 +27,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
+import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.userfavourite.UserFavourite
@@ -42,6 +45,7 @@ import com.example.capstoneproject.favourite.profileimage.ProfilePictureUnexpand
 import com.example.capstoneproject.navigator.Routes
 import com.example.capstoneproject.ui.theme.CoolGrey
 import com.example.capstoneproject.ui.theme.PartyPink
+import kotlinx.coroutines.launch
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -53,28 +57,36 @@ fun UnexpandedCard(
     foodList: List<Food?>,
     onItemClick: (Boolean) -> Unit,
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start,
+    Column(
+        modifier = Modifier.padding(bottom = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        ProfilePictureUnexpanded(userFav, foodList)
-        Column {
-            Text(
-                text = foodNameDataFinder(userFav!!.foodId, foodList),
-                style = MaterialTheme.typography.headlineSmall,
-            )
-            Text(
-                text = "$${foodPriceDataFinder(userFav.foodId, foodList).formatToTwoDecimalPlaces()}",
-                style = MaterialTheme.typography.titleMedium,
-            )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            ProfilePictureUnexpanded(userFav, foodList)
+            Column {
+                Text(
+                    text = foodNameDataFinder(userFav!!.foodId, foodList),
+                    style = MaterialTheme.typography.headlineSmall,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = "$${foodPriceDataFinder(userFav.foodId, foodList).formatToTwoDecimalPlaces()}",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+
+            }
         }
         Icon(
             modifier =
-                Modifier
-                    .padding(start = 8.dp)
-                    .clickable {
-                        onItemClick(!isExpanded)
-                    },
+            Modifier
+                .padding(start = 8.dp)
+                .clickable {
+                    onItemClick(!isExpanded)
+                },
             imageVector = Icons.Default.KeyboardArrowDown,
             contentDescription = "Arrow Down",
         )
@@ -90,6 +102,7 @@ fun ExpandedCard(
     foodList: List<Food?>,
     onItemClick: (Boolean) -> Unit,
     isExpanded: Boolean,
+    capstoneViewModel: CapstoneViewModel
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -108,16 +121,6 @@ fun ExpandedCard(
                     style = MaterialTheme.typography.titleLarge,
                 )
             }
-            Icon(
-                modifier =
-                    Modifier
-                        .padding(vertical = 24.dp)
-                        .clickable {
-                            onItemClick(!isExpanded)
-                        },
-                imageVector = Icons.Default.KeyboardArrowUp,
-                contentDescription = "Arrow Down",
-            )
         }
         ProfilePicture(userFav, foodList)
 
@@ -137,7 +140,7 @@ fun ExpandedCard(
                     navController.navigate(
                         "${Routes.Recur.route}/" +
                             "${foodNameDataFinder(userFav.foodId, foodList)}/" +
-                            "${foodPriceDataFinder(userFav.foodId,foodList)}/" +
+                            "${foodPriceDataFinder(userFav.foodId, foodList)}/" +
                             "${restaurantNameDataFinder(userFav.restaurantId, restaurant)}/" +
                             URLEncoder.encode(
                                 imageDataFinder(userFav.foodId, foodList),
@@ -148,12 +151,41 @@ fun ExpandedCard(
                 }
             },
             modifier =
-                Modifier
-                    .padding(16.dp)
-                    .align(Alignment.CenterHorizontally),
+            Modifier
+                .padding(16.dp)
+                .align(Alignment.CenterHorizontally),
         ) {
             Text("Set Recurring")
         }
+
+        Button(
+            colors = ButtonDefaults.buttonColors(PartyPink),
+            onClick = {
+                capstoneViewModel.viewModelScope.launch {
+                    if (userFav != null) {
+                        capstoneViewModel.deleteUserFav(userFav.favId)
+                    }
+                }
+            },
+            modifier =
+            Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(bottom = 16.dp)
+        ) {
+            Text(
+                "Remove",
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+        }
+
+        Icon(
+            modifier =
+            Modifier
+                .clickable { onItemClick(!isExpanded) }
+                .padding(bottom = 16.dp),
+            imageVector = Icons.Default.KeyboardArrowUp,
+            contentDescription = "Arrow Down",
+        )
     }
 }
 
@@ -164,21 +196,25 @@ fun ExpandableFoodItem(
     navController: NavHostController,
     restaurant: List<Restaurant?>,
     foodList: List<Food?>,
+    capstoneViewModel: CapstoneViewModel
 ) {
     var isExpanded by remember { mutableStateOf(false) }
     ElevatedCard(
         modifier =
-            Modifier
-                .padding(10.dp)
-                .fillMaxWidth()
-                .wrapContentHeight(align = Alignment.Top),
+        Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
+            .wrapContentHeight(align = Alignment.Top),
         colors = CardDefaults.cardColors(CoolGrey),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
     ) {
         if (!isExpanded) {
             UnexpandedCard(isExpanded, userFav, foodList, onItemClick = { isExpanded = it })
         } else {
-            ExpandedCard(navController, restaurant, userFav, foodList, onItemClick = { isExpanded = it }, isExpanded)
+            ExpandedCard(
+                navController, restaurant, userFav, foodList, onItemClick = { isExpanded = it }, isExpanded,
+                capstoneViewModel
+            )
         }
     }
 }

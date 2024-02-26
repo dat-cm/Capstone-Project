@@ -3,6 +3,8 @@ This file is used to create @Composable functions to get pages to navigate
  */
 package com.example.capstoneproject.navigator
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.example.capstoneproject.data.database.CapstoneViewModel
@@ -37,6 +39,7 @@ class PageComposable {
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @Composable
     fun ToSelection(
         navController: NavHostController,
@@ -79,8 +82,9 @@ class PageComposable {
         restaurantList: List<Restaurant?>,
         userFav: List<UserFavourite?>,
         foodList: List<Food?>,
+        capstoneViewModel: CapstoneViewModel
     ) {
-        return FavouriteUI(navController, restaurantList, userFav, foodList)
+        return FavouriteUI(navController, restaurantList, userFav, foodList, capstoneViewModel)
     }
 
     @Composable

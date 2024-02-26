@@ -3,6 +3,8 @@ This file is used to control the navigation between pages
  */
 package com.example.capstoneproject.navigator
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -17,6 +19,7 @@ import com.example.capstoneproject.data.database.userfavourite.UserFavourite
 import com.example.capstoneproject.data.database.userpreferences.UserPreferences
 
 class PageNavigators {
+    @RequiresApi(Build.VERSION_CODES.N)
     @Suppress("ktlint:standard:function-naming")
     @Composable
     fun Navigation(
@@ -66,6 +69,7 @@ class PageNavigators {
                     restaurantList,
                     userFav,
                     foodList,
+                    capstoneViewModel
                 )
             }
             composable(

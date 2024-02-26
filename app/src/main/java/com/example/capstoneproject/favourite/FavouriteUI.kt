@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.capstoneproject.data.database.CapstoneViewModel
 import com.example.capstoneproject.data.database.food.Food
 import com.example.capstoneproject.data.database.restaurant.Restaurant
 import com.example.capstoneproject.data.database.userfavourite.UserFavourite
@@ -40,6 +41,7 @@ fun FavouriteUI(
     restaurant: List<Restaurant?>,
     userFav: List<UserFavourite?>,
     foodList: List<Food?>,
+    capstoneViewModel: CapstoneViewModel
 ) {
     Scaffold(
         topBar = {
@@ -66,18 +68,18 @@ fun FavouriteUI(
                 modifier = Modifier.padding(paddingValues),
             ) {
                 items(userFav) { item ->
-                    ExpandableFoodItem(item, navController, restaurant, foodList)
+                    ExpandableFoodItem(item, navController, restaurant, foodList, capstoneViewModel)
                 }
             }
         } else {
             Column(
                 modifier =
-                    Modifier
-                        .padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                        )
-                        .fillMaxSize(),
+                Modifier
+                    .padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                    )
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
@@ -86,7 +88,7 @@ fun FavouriteUI(
                     fontSize = 24.sp,
                     textAlign = TextAlign.Center,
                 )
-                Spacer(modifier = Modifier.padding(top =  16.dp))
+                Spacer(modifier = Modifier.padding(top = 16.dp))
                 Button(
                     onClick = { navController.navigate(Routes.Selection.route) },
                     colors = ButtonDefaults.buttonColors(PartyPink),
