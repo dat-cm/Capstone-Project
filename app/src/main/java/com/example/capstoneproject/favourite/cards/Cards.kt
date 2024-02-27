@@ -126,8 +126,10 @@ fun ExpandedCard(
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Row{
-                    Text("Delivery Time: ", style = MaterialTheme.typography.titleLarge)
-                    userFav.recurTime?.let { Text(it, style = MaterialTheme.typography.titleLarge) }
+                    if(userFav.isRecur){
+                        Text("Delivery Time: ", style = MaterialTheme.typography.titleLarge)
+                        userFav.recurTime?.let { Text(it, style = MaterialTheme.typography.titleLarge) }
+                    }
                 }
             }
 
