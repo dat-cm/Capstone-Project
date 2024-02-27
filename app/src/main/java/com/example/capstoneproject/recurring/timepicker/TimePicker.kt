@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 @Suppress("ktlint:standard:function-naming")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TimePicker() {
+fun TimePicker(onTimeSelected: (String) -> Unit) {
     val myState = rememberTimePickerState(9, 15, false)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -22,8 +22,11 @@ fun TimePicker() {
         Text(
             text = "Time picked is ${
                 if (myState.hour >= 12) {
+                    onTimeSelected("${myState.hour}:${String.format("%02d", myState.minute)} PM")
                     "${myState.hour % 12}:${String.format("%02d", myState.minute)} PM"
+                    
                 } else {
+                    onTimeSelected("${myState.hour}:${String.format("%02d", myState.minute)} AM")
                     "${myState.hour}:${String.format("%02d", myState.minute)} AM"
                 }
             }",

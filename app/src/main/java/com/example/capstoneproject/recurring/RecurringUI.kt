@@ -140,7 +140,10 @@ fun RecurringUI(
             Text("Pick the time to receive your meal", fontSize = 20.sp)
             Spacer(modifier = Modifier.height(8.dp))
             // Time picker
-            TimePicker()
+            TimePicker{
+                    time ->
+                selectedTime = time
+            }
 
             Spacer(modifier = Modifier.height(8.dp))
             Text("Pick the days you want it to recur", fontSize = 20.sp)
@@ -157,7 +160,7 @@ fun RecurringUI(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Button(
-                    enabled = selectedTime != "" && selectedDays.isNotEmpty(),
+                    enabled = (selectedTime != "") && selectedDays.isNotEmpty(),
                     onClick = {
                         Log.i("id", favId.toString())
                         Log.i("selected time", selectedTime)
