@@ -77,12 +77,17 @@ fun UnexpandedCard(
                     text = "$${foodPriceDataFinder(userFav.foodId, foodList).formatToTwoDecimalPlaces()}",
                     style = MaterialTheme.typography.titleLarge,
                 )
+                if(userFav.isRecur){
+                    Row{
+                        Text("Delivery Time: ", style = MaterialTheme.typography.titleLarge)
+                        userFav.recurTime?.let { Text(it, style = MaterialTheme.typography.titleLarge) }
+                    }
 
+                }
             }
         }
         Icon(
-            modifier =
-            Modifier
+            modifier = Modifier
                 .padding(start = 8.dp)
                 .clickable {
                     onItemClick(!isExpanded)
@@ -120,7 +125,12 @@ fun ExpandedCard(
                     text = "$${foodPriceDataFinder(userFav.foodId, foodList).formatToTwoDecimalPlaces()}",
                     style = MaterialTheme.typography.titleLarge,
                 )
+                Row{
+                    Text("Delivery Time: ", style = MaterialTheme.typography.titleLarge)
+                    userFav.recurTime?.let { Text(it, style = MaterialTheme.typography.titleLarge) }
+                }
             }
+
         }
         ProfilePicture(userFav, foodList)
 
@@ -131,56 +141,58 @@ fun ExpandedCard(
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.headlineSmall,
             )
-        }
 
-        Button(
-            colors = ButtonDefaults.buttonColors(PartyPink),
-            onClick = {
-                if (userFav != null) {
-                    navController.navigate(
-                        "${Routes.Recur.route}/" +
-                            "${foodNameDataFinder(userFav.foodId, foodList)}/" +
-                            "${foodPriceDataFinder(userFav.foodId, foodList)}/" +
-                            "${restaurantNameDataFinder(userFav.restaurantId, restaurant)}/" +
-                            URLEncoder.encode(
+            Button(
+                colors = ButtonDefaults.buttonColors(PartyPink),
+                onClick = {
+                    if(!userFav.isRecur) {
+                        navController.navigate(
+                            "${Routes.Recur.route}/" + "${
+                                foodNameDataFinder(
+                                    userFav.foodId,
+                                    foodList
+                                )
+                            }/" + "${
+                                foodPriceDataFinder(
+                                    userFav.foodId,
+                                    foodList
+                                )
+                            }/" + "${restaurantNameDataFinder(userFav.restaurantId, restaurant)}/" + URLEncoder.encode(
                                 imageDataFinder(userFav.foodId, foodList),
-                                StandardCharsets.UTF_8
-                                    .toString(),
+                                StandardCharsets.UTF_8.toString(),
                             ) + "/${userFav.favId}",
-                    )
-                }
-            },
-            modifier =
-            Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally),
-        ) {
-            Text("Set Recurring")
-        }
+                        )
+                    } else{
+                        capstoneViewModel.viewModelScope.launch {
+                            capstoneViewModel.updateRecurrence(userFav.favId, false, "", emptyList())
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .padding(16.dp)
+                    .align(Alignment.CenterHorizontally),
+            ) {
+                if (!userFav.isRecur) Text("Set Recurring") else Text("Remove Recur")
+            }
 
-        Button(
-            colors = ButtonDefaults.buttonColors(PartyPink),
-            onClick = {
-                capstoneViewModel.viewModelScope.launch {
-                    if (userFav != null) {
+            Button(
+                colors = ButtonDefaults.buttonColors(PartyPink), onClick = {
+                    capstoneViewModel.viewModelScope.launch {
                         capstoneViewModel.deleteUserFav(userFav.favId)
                     }
-                }
-            },
-            modifier =
-            Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(bottom = 16.dp)
-        ) {
-            Text(
-                "Remove",
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
+
+                }, modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(bottom = 16.dp)
+            ) {
+                Text(
+                    "Remove", modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
         }
 
         Icon(
-            modifier =
-            Modifier
+            modifier = Modifier
                 .clickable { onItemClick(!isExpanded) }
                 .padding(bottom = 16.dp),
             imageVector = Icons.Default.KeyboardArrowUp,
@@ -200,8 +212,7 @@ fun ExpandableFoodItem(
 ) {
     var isExpanded by remember { mutableStateOf(false) }
     ElevatedCard(
-        modifier =
-        Modifier
+        modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
             .wrapContentHeight(align = Alignment.Top),
@@ -212,7 +223,12 @@ fun ExpandableFoodItem(
             UnexpandedCard(isExpanded, userFav, foodList, onItemClick = { isExpanded = it })
         } else {
             ExpandedCard(
-                navController, restaurant, userFav, foodList, onItemClick = { isExpanded = it }, isExpanded,
+                navController,
+                restaurant,
+                userFav,
+                foodList,
+                onItemClick = { isExpanded = it },
+                isExpanded,
                 capstoneViewModel
             )
         }

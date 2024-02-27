@@ -4,23 +4,25 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.*
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,6 +45,10 @@ fun FavouriteUI(
     foodList: List<Food?>,
     capstoneViewModel: CapstoneViewModel
 ) {
+    var selectedRecurIndex by remember { mutableIntStateOf(0) }
+    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    val scrollState = rememberScrollState()
+    val dayList = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
     Scaffold(
         topBar = {
             Surface(
@@ -64,11 +70,106 @@ fun FavouriteUI(
         },
     ) { paddingValues ->
         if (userFav.isNotEmpty()) {
-            LazyColumn(
-                modifier = Modifier.padding(paddingValues),
-            ) {
-                items(userFav) { item ->
-                    ExpandableFoodItem(item, navController, restaurant, foodList, capstoneViewModel)
+            TabRow(
+                selectedTabIndex = selectedRecurIndex,
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .height(60.dp),
+                indicator = { tabPositions ->
+                    TabRowDefaults.Indicator(
+                        modifier = Modifier.tabIndicatorOffset(tabPositions[selectedRecurIndex]),
+                        color = PartyPink
+                    )
+                }) {
+                Tab(
+                    selected = selectedRecurIndex == 0,
+                    onClick = { selectedRecurIndex = 0 },
+                    selectedContentColor = PartyPink
+                ) {
+                    Text(
+                        text = "Set Recurring",
+                        fontSize = 24.sp,
+                        textAlign = TextAlign.Center,
+                        color = if (selectedRecurIndex == 0) {
+                            PartyPink
+                        } else {
+                            Color.Black
+                        },
+                    )
+                }
+                Tab(
+                    selected = selectedRecurIndex == 1,
+                    onClick = { selectedRecurIndex = 1 },
+                    selectedContentColor = PartyPink
+                ) {
+                    Text(
+                        text = "Recurring",
+                        fontSize = 24.sp,
+                        textAlign = TextAlign.Center,
+                        color = if (selectedRecurIndex == 1) {
+                            PartyPink
+                        } else {
+                            Color.Black
+                        },
+                    )
+                }
+            }
+            when (selectedRecurIndex) {
+                0 ->
+                    LazyColumn(
+                        modifier = Modifier.padding(top = paddingValues.calculateTopPadding() + 60.dp),
+                    ) {
+                        items(userFav) { item ->
+                            if (item != null) {
+                                if (!item.isRecur) {
+                                    ExpandableFoodItem(item, navController, restaurant, foodList, capstoneViewModel)
+                                }
+                            }
+
+                        }
+                    }
+
+                1 -> Column(
+                    modifier = Modifier.padding(top = paddingValues.calculateTopPadding() + 50.dp)
+                ) {
+                    LazyRow(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        items(dayList) { tab ->
+                            Tab(
+                                text = { Text(text = dayList[dayList.indexOf(tab)]) },
+                                selected = true, // Set this to the current selected tab
+                                onClick = { selectedTabIndex = dayList.indexOf(tab) },
+                                selectedContentColor =
+                                if (dayList.indexOf(tab) == selectedTabIndex) {
+                                    PartyPink
+                                } else {
+                                    Color.Black
+                                }
+                            )
+                        }
+                    }
+                    when (selectedTabIndex) {
+                        selectedTabIndex -> LazyColumn() {
+                            items(userFav) { item ->
+                                if (item != null) {
+                                    if (item.isRecur) {
+                                        item.recurDate.forEach { day ->
+                                            if (day == dayList[selectedTabIndex]) {
+                                                ExpandableFoodItem(
+                                                    item,
+                                                    navController,
+                                                    restaurant,
+                                                    foodList,
+                                                    capstoneViewModel
+                                                )
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         } else {

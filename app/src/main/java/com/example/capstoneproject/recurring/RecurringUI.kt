@@ -33,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -93,6 +94,7 @@ fun RecurringUI(
                     .padding(top = paddingValues.calculateTopPadding(), start = 16.dp, end = 16.dp)
                     .background(color = Color.White)
                     .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Placeholders for food name, price, restaurant and image
             Spacer(modifier = Modifier.height(8.dp))
@@ -138,9 +140,7 @@ fun RecurringUI(
             Text("Pick the time to receive your meal", fontSize = 20.sp)
             Spacer(modifier = Modifier.height(8.dp))
             // Time picker
-            TimePicker { time ->
-                selectedTime = time
-            }
+            TimePicker()
 
             Spacer(modifier = Modifier.height(8.dp))
             Text("Pick the days you want it to recur", fontSize = 20.sp)
@@ -170,7 +170,7 @@ fun RecurringUI(
                             capstoneViewModel.updateRecurrence(favId!!, true, selectedTime, selectedDays)
                         }
                         // Handle Confirm Button
-                        navController.navigate(Routes.Home.route)
+                        navController.navigate(Routes.Like.route)
                     },
                     modifier = Modifier.weight(1f),
                     colors = ButtonDefaults.buttonColors(PartyPink),
