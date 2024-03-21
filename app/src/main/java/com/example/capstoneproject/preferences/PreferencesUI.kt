@@ -115,6 +115,7 @@ fun PreferencesUI(
                         addToListForInsert(userFoodPreferences),
                         userBudget.toDouble(),
                     )
+                    navController.navigate(Routes.Home.route)
                     navController.navigate(Routes.Selection.route)
                 },
             ) {
