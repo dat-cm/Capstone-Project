@@ -10,6 +10,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -67,6 +68,17 @@ fun SelectionUI(
                         }
                     },
                     actions = {
+                        IconButton(
+                            onClick = {
+                                navController.navigate(Routes.Like.route)
+                            },
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Favorite,
+                                contentDescription = "like",
+                                tint = PartyPink,
+                            )
+                        }
                         IconButton(
                             onClick = {
                                 navController.navigate(Routes.Preferences.route)

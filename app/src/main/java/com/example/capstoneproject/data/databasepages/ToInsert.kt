@@ -25,7 +25,7 @@ class ToInsert {
                 Button(
                     onClick = {
                         capstoneViewModel.viewModelScope.launch {
-                             capstoneViewModel.insertUser(User("Test User"))
+                            capstoneViewModel.insertUser(User("Test User"))
                         }
                     },
                 ) {
@@ -44,19 +44,176 @@ class ToInsert {
                     onClick = {
                         capstoneViewModel.viewModelScope.launch {
                             //Halal
-                            capstoneViewModel.insertRestaurant(Restaurant("Zaynab's Kitchen", "Halal"))
-                            capstoneViewModel.insertRestaurant(Restaurant("Saffron Oasis", "Halal"))
-                            capstoneViewModel.insertRestaurant(Restaurant("Majestic Halal Haven", "Halal"))
+                            //Malaysian Cuisine
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Bunga Raya Halal Kitchen",
+                                    "Halal"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Seri Melayu Bistro",
+                                    "Halal"
+                                )
+                            )
+
+                            //Japanese Cuisine
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Sushi Sakura Halal",
+                                    "Halal"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Zen Ramen & Teppanyaki Halal",
+                                    "Halal"
+                                )
+                            )
+
+                            //Western Cuisine
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Sultan's Bistro",
+                                    "Halal"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Medina Grill & Steakhouse",
+                                    "Halal"
+                                )
+                            )
+
 
                             //Non-halal
-                            capstoneViewModel.insertRestaurant(Restaurant("Burger Bonanza Grill", "Non-Halal"))
-                            capstoneViewModel.insertRestaurant(Restaurant("Smokehouse sensation", "Non-Halal"))
-                            capstoneViewModel.insertRestaurant(Restaurant("Carnivore's Cove", "Non-Halal"))
+                            //Chinese
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Dragon's Delight",
+                                    "Non-Halal"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Imperial Dragon Palace",
+                                    "Non-Halal"
+                                )
+                            )
+                            //Korean
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Seoul Sizzle BBQ House",
+                                    "Non-Halal"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Kimchi King's Kitchen",
+                                    "Non-Halal"
+                                )
+                            )
+                            //Thai
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Fiery Thai Bites",
+                                    "Non-Halal"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Bangkok Spice Haven",
+                                    "Non-Halal"
+                                )
+                            )
 
-                            //Vegan/Vegetarian
-                            capstoneViewModel.insertRestaurant(Restaurant("Greenleaf Haven", "Vegan/Vegetarian"))
-                            capstoneViewModel.insertRestaurant(Restaurant("Plantastic Plates", "Vegan/Vegetarian"))
-                            capstoneViewModel.insertRestaurant(Restaurant("Harvest Bistro", "Vegan/Vegetarian"))
+                            //Vegan
+                            //American
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Green Bliss Café",
+                                    "Vegan"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Herbivore Haven",
+                                    "Vegan"
+                                )
+                            )
+
+                            //Asian
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    " Lotus Bites",
+                                    "Vegan"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Zen Garden Vegan Kitchen",
+                                    "Vegan"
+                                )
+                            )
+
+                            //Indian
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Spice Haven Vegan Bistro",
+                                    "Vegan"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Green Leaf Masala House",
+                                    "Vegan"
+                                )
+                            )
+
+
+                            //Vegetarian
+                            //East Asian
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "ZenBite Vegetarian Delights",
+                                    "Vegetarian"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Lotus Leaf Vegetarian Haven",
+                                    "Vegetarian"
+                                )
+                            )
+
+                            //Fusion
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Harmony Bites",
+                                    "Vegetarian"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Veggie Fusion Delights",
+                                    "Vegetarian"
+                                )
+                            )
+                            //Western
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Sage & Saffron",
+                                    "Vegetarian"
+                                )
+                            )
+                            capstoneViewModel.insertRestaurant(
+                                Restaurant(
+                                    "Green Haven Grill",
+                                    "Vegetarian"
+                                )
+                            )
+
                             // capstoneViewModel.deleteRestaurant(15)
                         }
                     },
@@ -66,626 +223,10 @@ class ToInsert {
 
                 Button(
                     onClick = {
-                        capstoneViewModel.viewModelScope.launch {
-                            //res 3
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Majestic Lamb Shank Delight",
-                            foodPrice = 18.99,
-                            foodCategory = "Meat",
-                            foodImage = "https://www.foodadvisor.my/attachments/608caba03897c407d84c983da9ee6f62327ab0e3/store/fill/1000/500/72f3b70d74a6ea0615b590652496922d69f1ba878118650aade019d1ad44/featured_image.jpg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Sultan's Chicken Kebab Platter",
-                                foodPrice = 14.50,
-                                foodCategory = "Meat",
-                            foodImage = "https://boons-marketplace-restaurant-web-images.s3.us-east-2.amazonaws.com/uploads/menu/IgYT7WrVKcy1EG5DuAQl.jpg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Royal Saffron Rice Feast",
-                            foodPrice = 12.99,
-                            foodCategory = "Rice",
-                            foodImage = "https://www.whiskaffair.com/wp-content/uploads/2019/05/Saffron-Rice-2-3.jpg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Majestic Biryani Supreme",
-                                foodPrice = 11.50,
-                                foodCategory = "Rice",
-                            foodImage = "https://miro.medium.com/v2/resize:fit:450/1*m1_trJ_qbjkrTxl_yaLaCg.jpeg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Rose Petal Panna Cotta",
-                            foodPrice = 6.50,
-                            foodCategory = "Dessert",
-                            foodImage = "https://jajabakes.com/wp-content/uploads/2019/08/rose-panna-cotta-4.jpg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Date and Nut Baklava",
-                            foodPrice = 5.50,
-                            foodCategory = "Dessert",
-                            foodImage = "https://www.californiagreekgirl.com/wp-content/uploads/2011/02/Chocolate-Baklava-1.jpg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Majestic Spicy Ramen Bowl",
-                            foodPrice = 14.99,
-                            foodCategory = "Noodles",
-                            foodImage = "https://media1.dallasobserver.com/dal/imager/u/original/18045459/wolfgang_ten_ramen_tonkotsu__1_.jpg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Heavenly Vegetable Chow Mein",
-                            foodPrice = 10.50,
-                            foodCategory = "Noodles",
-                            foodImage = "https://cupfulofkale.com/wp-content/uploads/2020/02/Vegan-Vegetable-Chow-Mein.jpg.webp",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Majestic Seafood Platter",
-                                foodPrice = 17.99,
-                                foodCategory = "Seafood",
-                            foodImage = "https://img.taste.com.au/9-tT5J3N/taste/2016/11/grilled-seafood-platter-81225-1.jpeg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Spiced Seafood Linguine",
-                                foodPrice = 15.50,
-                                foodCategory = "Seafood",
-                            foodImage = "https://i0.wp.com/spicepaw.com/wp-content/uploads/2018/05/Spicy-Seafood-Linguine-9.jpg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Majestic Falafel Roll",
-                                foodPrice = 9.99,
-                                foodCategory = "Fast food",
-                            foodImage = "https://joyful-kitchen.com/wp-content/uploads/2022/04/royal-falafel-scaled.jpg",
-                            restaurantId = 3)
-                            )
-
-                            capstoneViewModel.insertFood(
-                                Food(
-                                foodName = "Gourmet Veggie Wrap",
-                                foodPrice = 8.50,
-                                foodCategory = "Fast food",
-                            foodImage = "https://www.foodiecrush.com/wp-content/uploads/2015/05/Hummus-Veggie-Wrap-foodiecrush.com-10.jpg",
-                            restaurantId = 3)
-                            )
-                            
-                            //
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Smoky BBQ Ribs",
-                                foodPrice = 15.99,
-                                foodCategory = "Meat",
-                            foodImage = "https://res.cloudinary.com/fatty-butts-bbq/images/f_auto,q_auto/v1647644304/fattybuttsbbq/Smoked-Ribs/Smoked-Ribs.jpg?_i=AA",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Peppered Beef Tenderloin",
-                                foodPrice = 18.49,
-                                foodCategory = "Meat",
-                            foodImage = "https://whatsgabycooking.com/wp-content/uploads/2019/12/WGC-Tenderloin-3-copy.jpg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Sizzling Beef Rice Bowl",
-                            foodPrice = 12.99,
-                            foodCategory = "Rice",
-                            foodImage = "https://storage.googleapis.com/leye_bucket/wp-content/uploads/9ccccf9a-sizzling-rice-beef.jpg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Cajun Chicken Rice Plate",
-                            foodPrice = 10.99,
-                            foodCategory = "Rice",
-                            foodImage = "https://img.taste.com.au/Ssi-Eelu/taste/2018/02/mar-18_cajun-chicken-rice-bowl-3000x2000-135698-1.jpg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Decadent Chocolate Lava Cake",
-                            foodPrice = 8.99,
-                            foodCategory = "Dessert",
-                            foodImage = "https://www.acouplecooks.com/wp-content/uploads/2022/02/Lava-Cake-005s.jpg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Caramelized Banana Split",
-                                foodPrice = 9.49,
-                                foodCategory = "Dessert",
-                            foodImage = "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2015/12/1/1/CCTIA201H_Caramelized-Banana-Split-Sundae_s4x3.jpg.rend.hgtvcom.616.462.suffix/1449078371216.jpeg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Spicy Shrimp Linguine",
-                                foodPrice = 14.49,
-                                foodCategory = "Noodles",
-                            foodImage = "https://nomnompaleo.com/wp-content/uploads/2022/01/1000-Spicy-Shrimp-aaDSC_7419.jpg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Beefy Alfredo Fettuccine",
-                                foodPrice = 13.99,
-                                foodCategory = "Noodles",
-                            foodImage = "https://krollskorner.com/wp-content/uploads/2023/02/steakalfredo_9-2959.jpg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Grilled Lobster Tails",
-                                foodPrice = 22.99,
-                                foodCategory = "Seafood",
-                            foodImage = "https://www.wholesomeyum.com/wp-content/uploads/2021/06/wholesomeyum-Grilled-Lobster-Tail-Recipe-28.jpg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Sizzling Garlic Butter Prawns",
-                                foodPrice = 17.99,
-                                foodCategory = "Seafood",
-                            foodImage = "https://www.marionskitchen.com/wp-content/uploads/2021/08/20201119_Garlic-Butter-Prawns-11-scaled-e1628864662428.jpg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Crispy Chicken Tenders Basket",
-                            foodPrice = 9.99,
-                            foodCategory = "Fast food",
-                            foodImage = "https://popmenucloud.com/cdn-cgi/image/width=1920,height=1920,format=auto,fit=scale-down/wlczfrmv/d6819997-6f9b-4f42-8e4d-1ee40402835a.jpg",
-                            restaurantId = 4))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Double Bacon Cheeseburger Combo",
-                            foodPrice = 12.49,
-                            foodCategory = "Fast food",
-                            foodImage = "https://wendys.com.ph/cdn/shop/files/baconcheeseburger_combo.png?v=1692065227",
-                            restaurantId = 4))
-                            
-                            //res 5
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Smoked Brisket Platter",
-                                foodPrice = 22.99,
-                                foodCategory = "Meat",
-                            foodImage = "https://www.gffoodservice.com.au/content/uploads/2015/09/img-ideas-banner_texas_platter_@2x.jpg",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "BBQ Pork Belly",
-                                foodPrice = 16.50,
-                                foodCategory = "Meat",
-                            foodImage = "https://cookathomemom.com/wp-content/uploads/2022/10/Air-Fryer-Pork-Belly-Bites-2.jpg",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Cajun Chicken Rice Bowl",
-                            foodPrice = 14.99,
-                            foodCategory = "Rice",
-                            foodImage = "https://images.squarespace-cdn.com/content/v1/5e4eabf35198d84399d289cf/1592413166190-I7J4XXSJDI5WAPBXHC82/Cajun+Chicken+%26+Rice+Bowl+Recipe",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Pulled Pork and Beans",
-                            foodPrice = 12.50,
-                            foodCategory = "Rice",
-                            foodImage = "https://i.dailymail.co.uk/1s/2019/05/21/17/13771188-7054713-Delicious_This_popular_recipe_is_perfect_if_you_ve_got_a_large_g-a-58_1558455209802.jpg",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Smoked Chocolate Pecan Pie",
-                            foodPrice = 9.50,
-                            foodCategory = "Dessert",
-                            foodImage = "https://www.smokedmeatsunday.com/wp-content/uploads/2022/10/Smoked-Chocolate-Pecan-Pie-17-scaled.jpg",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Bourbon-Infused Bread Pudding",
-                            foodPrice = 8.99,
-                            foodCategory = "Dessert",
-                            foodImage = "https://www.foodandwine.com/thmb/1LWgxFn9txkrWD7RVz5jRvZjB9Q=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/HD-201301-r-bread-pudding-with-irish-whiskey-5f958dbef4b54c4d8021e0982ceef0c7.jpg",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Spicy BBQ Beef Noodles",
-                            foodPrice = 15.99,
-                            foodCategory = "Noodles",
-                            foodImage = "https://taste.co.za/wp-content/uploads/2019/07/BBQ-charred-beef-with-spicy-noodles.jpg",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Smoked Chicken Alfredo",
-                                foodPrice = 17.50,
-                                foodCategory = "Noodles",
-                            foodImage = "https://fashionablefoods.com/wp-content/uploads/2016/07/Featured-3.jpg",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Cedar Plank Grilled Salmon",
-                            foodPrice = 18.99,
-                            foodCategory = "Seafood",
-                            foodImage = "https://assets.epicurious.com/photos/5b770caff1ff6a661bb16346/master/pass/Should-I-Be-Using-Grilling-Planks-2-16082018.jpg",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Smoked Paprika Shrimp Skewers",
-                            foodPrice = 16.50,
-                            foodCategory = "Seafood",
-                            foodImage = "https://myuncommonsliceofsuburbia.com/wp-content/uploads/2020/06/grilled-shrimp-skewers-43-of-57-1-scaled.jpg",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "BBQ Bacon Cheeseburger",
-                                foodPrice = 12.99,
-                                foodCategory = "Fast food",
-                            foodImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaqgOARi20ztY03KtRdgrRnPc7AKd_MyrYhsBgsskQ16392MhH0ZWMiBDMmrABRpFYFOI&usqp=CAU",
-                            restaurantId = 5))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Pulled Pork Sandwich",
-                                foodPrice = 11.50,
-                                foodCategory = "Fast food",
-                            foodImage = "https://keviniscooking.com/wp-content/uploads/2023/04/Southern-Pulled-Pork-Sandwich-square.jpg",
-                            restaurantId = 5))
-                            
-                            //res 6
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Prime Rib Steak",
-                                foodPrice = 24.99,
-                                foodCategory = "Meat",
-                            foodImage = "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/21/sliced-prime-rib-on-cutting-board.jpg.rend.hgtvcom.1280.960.suffix/1608568530146.jpeg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "BBQ Pork Ribs",
-                                foodPrice = 18.50,
-                                foodCategory = "Meat",
-                            foodImage = "https://static.toiimg.com/thumb/75428606.cms?imgsize=1815588&width=800&height=800",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Teriyaki Beef Bowl",
-                                foodPrice = 15.99,
-                                foodCategory = "Rice",
-                            foodImage = "https://www.theseasonedmom.com/wp-content/uploads/2023/02/Beef-Teriyaki-Recipe-3.jpg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Cajun Chicken and Rice",
-                            foodPrice = 12.50,
-                            foodCategory = "Rice",
-                            foodImage = "https://img.hellofresh.com/f_auto,fl_lossy,q_auto,w_1200/hellofresh_s3/image/2019-w23-r4-blackened-chicken-and-cajun-rice-bowls-ad35dae8.jpg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Molten Lava Chocolate Cake",
-                            foodPrice = 8.50,
-                            foodCategory = "Dessert",
-                            foodImage = "https://www.melskitchencafe.com/wp-content/uploads/2023/01/updated-lava-cakes7.jpg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Cheesecake Factory Sampler",
-                                foodPrice = 7.99,
-                                foodCategory = "Dessert",
-                            foodImage = "https://cdn1.harryanddavid.com/wcsstore/HarryAndDavid/images/catalog/17_40034_30W_154e_v1xlx.jpg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Beef Stir-Fry Noodles",
-                                foodPrice = 14.99,
-                                foodCategory = "Noodles",
-                            foodImage = "https://casuallypeckish.com/wp-content/uploads/2021/11/Beef-noodle-stir-fry-1.jpg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Shrimp Scampi Linguine",
-                                foodPrice = 16.50,
-                                foodCategory = "Noodles",
-                            foodImage = "https://d14iv1hjmfkv57.cloudfront.net/assets/recipes/linguine-with-shrimp-scampi/_600x600_crop_center-center_61_line/Page-107-web-horizon.jpg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Grilled Salmon Fillet",
-                                foodPrice = 19.99,
-                                foodCategory = "Seafood",
-                            foodImage = "https://www.recipetineats.com/wp-content/uploads/2019/06/Marinated-Grilled-Salmon_8.jpg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Lemon Garlic Butter Prawns",
-                            foodPrice = 17.50,
-                            foodCategory = "Seafood",
-                            foodImage = "https://www.lecremedelacrumb.com/wp-content/uploads/2019/04/lemon-garlic-butter-shrimp-6-500x375.jpg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Classic Cheeseburger",
-                            foodPrice = 10.99,
-                            foodCategory = "Fast food",
-                            foodImage = "https://iambaker.net/wp-content/uploads/2019/05/cheeseburger-1.jpg",
-                            restaurantId = 6))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Crispy Fried Chicken Sandwich",
-                            foodPrice = 9.50,
-                            foodCategory = "Fast food",
-                            foodImage = "https://easychickenrecipes.com/wp-content/uploads/2019/06/featured-fried-chicken-sandwich-recipe-reshoot.jpg",
-                            restaurantId = 6))
-
-                            //res 7
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Coconut Curry Tofu Bowl",
-                            foodPrice = 12.99,
-                            foodCategory = "Rice",
-                            foodImage = "https://www.yayforfood.com/wp-content/uploads/one-pan-tofu-coconut-curry4-scaled.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Mushroom & Spinach Risotto",
-                            foodPrice = 11.49,
-                            foodCategory = "Rice",
-                            foodImage = "https://loveandgoodstuff.com/wp-content/uploads/2020/11/mushroom-spinach-risotto-1200x1200-1.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Lentil and Vegetable Soup",
-                            foodPrice = 8.99,
-                            foodCategory = "Soup",
-                            foodImage = "https://simple-veganista.com/wp-content/uploads/2019/10/vegan-lentil-soup-recipe-5.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Tomato Basil Bisque",
-                                foodPrice = 7.99,
-                                foodCategory = "Soup",
-                            foodImage = "https://reneenicoleskitchen.com/wp-content/uploads/2020/03/Creamy-Tomato-Basil-Bisque-Image-1a.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Quinoa Avocado Salad",
-                                foodPrice = 10.49,
-                                foodCategory = "Salad",
-                            foodImage = "https://feelgoodfoodie.net/wp-content/uploads/2021/04/Avocado-Stuffed-Quinoa-Salad-14.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Greek Chickpea Salad",
-                                foodPrice = 9.49,
-                                foodCategory = "Salad",
-                            foodImage = "https://www.aheadofthyme.com/wp-content/uploads/2021/04/chickpea-greek-salad-3.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Vegan Chocolate Mousse",
-                                foodPrice = 6.99,
-                                foodCategory = "Dessert",
-                            foodImage = "https://www.connoisseurusveg.com/wp-content/uploads/2022/02/vegan-chocolate-mousse-square-2-of-2.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Fruit Sorbet Delight",
-                                foodPrice = 5.99,
-                                foodCategory = "Dessert",
-                            foodImage = "https://img.freepik.com/premium-photo/sunkissed-fruit-sorbet-swirl-frosty-delight_961965-232.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Stir-Fried Veggie Udon Noodles",
-                                foodPrice = 11.99,
-                                foodCategory = "Noodles",
-                            foodImage = "https://yejiskitchenstories.com/wp-content/uploads/2020/12/IMG_1934-2.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Zucchini Pasta Primavera",
-                                foodPrice = 10.49,
-                                foodCategory = "Noodles",
-                            foodImage = "https://www.eatingwell.com/thmb/YhrjD1erQHzmsMyOH0O49Ey_Mrw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/7574700-42b354bac8fc45288845b63c3d9f99a5.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Crispy Cauliflower Wings Basket",
-                            foodPrice = 9.99,
-                            foodCategory = "Fast food",
-                            foodImage = "https://strengthandsunshine.com/wp-content/uploads/2022/02/Buffalo-Cauliflower-Wings-4.jpg",
-                            restaurantId = 7))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Vegan Beyond Burger Combo",
-                            foodPrice = 12.49,
-                            foodCategory = "Fast food",
-                            foodImage = "https://web.aw.ca/i/items/?i=beyond-meat-burger&d=beyond-meat-burger&cat=burgers&lang=beyond-meat-burger-en",
-                            restaurantId = 7))
-
-                            //res 8
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Spicy Chickpea and Vegetable Stir-Fry",
-                            foodPrice = 12.99,
-                            foodCategory = "Rice",
-                            foodImage = "https://yupitsvegan.com/wp-content/uploads/2016/09/kung-pao-chickpeas-vegan-6.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Cilantro-Lime Quinoa Bowl",
-                            foodPrice = 11.49,
-                            foodCategory = "Rice",
-                            foodImage = "https://www.twopeasandtheirpod.com/wp-content/uploads/2012/04/cilantro-lime-quinoa-500x427.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Creamy Butternut Squash Soup",
-                            foodPrice = 8.99,
-                            foodCategory = "Soup",
-                            foodImage = "https://www.wholesomeyum.com/wp-content/uploads/2018/09/wholesomeyum-Roasted-Butternut-Squash-Soup-Instant-Pot-4.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Coconut Lentil Soup",
-                                foodPrice = 8.49,
-                                foodCategory = "Soup",
-                            foodImage = "https://assets.bonappetit.com/photos/5a4e53204829cf767fcd9318/4:3/w_3748,h_2811,c_limit/vegan-coconut-lentil-soup.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Mango Avocado Kale Salad",
-                            foodPrice = 10.99,
-                            foodCategory = "Salad",
-                            foodImage = "https://www.leftyspoon.com/wp-content/uploads/2015/05/massaged-kale-salad-avocado-mango-hazelnut-overhead.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Kale and Cranberry Superfood Salad",
-                                foodPrice = 9.49,
-                                foodCategory = "Salad",
-                            foodImage = "https://www.foodfaithfitness.com/wp-content/uploads/2021/12/FG-TK-1-5.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Vegan Chocolate Avocado Mousse",
-                            foodPrice = 6.99,
-                            foodCategory = "Dessert",
-                            foodImage = "https://www.onelovelylife.com/wp-content/uploads/2021/01/Avocado-Chocolate-Mousse18.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Coconut Mango Sorbet",
-                                foodPrice = 5.99,
-                                foodCategory = "Dessert",
-                            foodImage = "https://images.eatsmarter.com/sites/default/files/styles/max_size/public/mango-and-coconut-sorbet-617570.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Sesame-Ginger Zucchini Noodle Stir-Fry",
-                            foodPrice = 11.99,
-                            foodCategory = "Noodles",
-                            foodImage = "https://inspiralized.com/wp-content/uploads/2016/12/6A2A4801-scaled-500x375.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Vegan Pad Thai",
-                                foodPrice = 10.49,
-                                foodCategory = "Noodles",
-                            foodImage = "https://cdn77-s3.lazycatkitchen.com/wp-content/uploads/2021/01/healthier-vegan-pad-thai-macro-1024x1536.jpg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Crispy Portobello Mushroom Burger",
-                            foodPrice = 9.99,
-                            foodCategory = "Fast food",
-                            foodImage = "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2013/5/28/0/ZB0409H_panko-crusted-portobello-mushroom-burger-recipe_s4x3.jpg.rend.hgtvcom.616.462.suffix/1371616119154.jpeg",
-                            restaurantId = 8))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Sweet Potato Fries Basket",
-                            foodPrice = 12.49,
-                            foodCategory = "Fast food",
-                            foodImage = "https://stordfkenticomedia.blob.core.windows.net/df-us/rms/media/recipemediafiles/recipes/retail/desktopimages/sweet_potato_fries-600.jpg?ext=.jpg",
-                            restaurantId = 8))
-
-                            //res 9
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Mushroom Risotto with Truffle Oil",
-                                foodPrice = 13.99,
-                                foodCategory = "Rice",
-                            foodImage = "https://cravingcalifornia.com/wp-content/uploads/2019/10/california_light_test-341-2-scaled.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Coconut Lime Tofu Rice Bowl",
-                                foodPrice = 11.49,
-                                foodCategory = "Rice",
-                            foodImage = "https://tastythriftytimely.com/wp-content/uploads/2022/12/Coconut-Lime-Tofu-5.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Vegetable Miso Soup",
-                                foodPrice = 7.99,
-                                foodCategory = "Soup",
-                            foodImage = "https://turniptheoven.com/wp-content/uploads/2015/10/Veggie-Loaded-Miso-Soup.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Roasted Red Pepper and Tomato Soup",
-                            foodPrice = 8.99,
-                            foodCategory = "Soup",
-                            foodImage = "https://www.sainsburysmagazine.co.uk/uploads/media/1800x1800/08/4158-Roasted-red-pepper-and-cherry-tomato-soup---1120.jpg?v=1-0",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Avocado and Black Bean Fiesta Salad",
-                            foodPrice = 9.49,
-                            foodCategory = "Salad",
-                            foodImage = "https://i0.wp.com/www.nutritionhappens.com/wp-content/uploads/2019/09/IMG_5325-2.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Roasted Beet and Quinoa Salad",
-                                foodPrice = 10.99,
-                                foodCategory = "Salad",
-                            foodImage = "https://images.squarespace-cdn.com/content/v1/55c95b6ae4b064262a932403/1548619749113-OQO6B095N3WX6OWW53B2/beetquinoasalad-7.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Mixed Berry Vegan Cheesecake",
-                            foodPrice = 5.99,
-                            foodCategory = "Dessert",
-                            foodImage = "https://talidavoinea.au/wp-content/uploads/2016/06/1L2A1355-copy.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Vegan Berry Coconut Tart",
-                            foodPrice = 7.99,
-                            foodCategory = "Dessert",
-                            foodImage = "https://www.texanerin.com/content/uploads/2015/07/raspberry-coconut-tart-FI.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Stir-Fried Veggie Tofu Noodles",
-                                foodPrice = 12.49,
-                                foodCategory = "Noodles",
-                            foodImage = "https://static.onecms.io/wp-content/uploads/sites/19/2015/05/04/stir-fried-tofu-broccoli-lo-mein-ay.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Sesame Garlic Zoodles",
-                                foodPrice = 10.99,
-                                foodCategory = "Noodles",
-                            foodImage = "https://www.simplyquinoa.com/wp-content/uploads/2019/06/garlic-sesame-zucchini-noodles-5-500x500.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Crispy Cauliflower Tacos",
-                                foodPrice = 9.99,
-                                foodCategory = "Fast food",
-                            foodImage = "https://www.halfbakedharvest.com/wp-content/uploads/2021/01/Crispy-Cauliflower-Tinga-Tacos-with-Honey-Lime-Avocado-Crema-1.jpg",
-                            restaurantId = 9))
-
-                            capstoneViewModel.insertFood(Food(
-                                foodName = "Vegan BBQ Jackfruit Sandwich Combo",
-                                foodPrice = 12.99,
-                                    foodCategory = "Fast food",
-                            foodImage = "https://piquantpost.com/cdn/shop/articles/BjIF94-tt1atKMshgIEoS_1000x.jpg?v=1690343995",
-                            restaurantId = 9))
-                        }
+                        addHalalFood(capstoneViewModel)
+                        addNonHalalFood(capstoneViewModel)
+                        addVeganFood(capstoneViewModel)
+                        addVegetarianFood(capstoneViewModel)
                     },
                 ) {
                     Text("Add Food")
@@ -703,9 +244,8 @@ class ToInsert {
                 Button(
                     onClick = {
                         capstoneViewModel.viewModelScope.launch {
-                            val listCount: List<Int> = listOf(55,56,57)
-                            listCount.forEach {
-                                    count ->
+                            val listCount: List<Int> = listOf(55, 56, 57)
+                            listCount.forEach { count ->
                                 capstoneViewModel.deleteUserFav(count)
                             }
                         }
@@ -714,6 +254,716 @@ class ToInsert {
                     Text("Delete User fav")
                 }
             }
+        }
+    }
+
+    private fun addVegetarianFood(capstoneViewModel: CapstoneViewModel) {
+        capstoneViewModel.viewModelScope.launch {
+            //restaurant 13
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Quinoa Avocado Salad",
+                    foodPrice = 12.99,
+                    foodCategory = "American Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1152434878/photo/buddha-bowl-with-grilled-avocado-asparagus-chickpeas-pea-sprouts-and-broccoli.jpg?s=612x612&w=is&k=20&c=chy_4TasNGHbOt2vxSKLYCQi660uEn7rtGEs7Omhtvs=",
+                    restaurantId = 13
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "BBQ Jackfruit Sandwich",
+                    foodPrice = 14.49,
+                    foodCategory = "American Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/526283108/photo/homemade-vegan-pulled-jackfruit-bbq-sandwich.jpg?s=612x612&w=is&k=20&c=Ozo1E4OIejnwhRee75yiWwGKWL4Ou2MoCgw-2jj5tOo=",
+                    restaurantId = 13
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Vegan Mac and Cheese",
+                    foodPrice = 11.99,
+                    foodCategory = "American Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1351652207/photo/vegan-white-mac-and-cheese-with-a-glass-of-wine.jpg?s=612x612&w=is&k=20&c=w2XoP6QgR3i7tJddtKSsXiBqW7P1-9k7S4XOG9BCmQA=",
+                    restaurantId = 13
+                )
+            )
+            //restaurant 14
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Mushroom Lentil Shepherd's Pie",
+                    foodPrice = 11.99,
+                    foodCategory = "American Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1255601380/photo/vegan-lentil-and-mushroom-shepherds-pie.jpg?s=612x612&w=is&k=20&c=YMSyzRlbjSCypkTSf-coLB-3Jb-qEvgJoJVWzPa5X3k=",
+                    restaurantId = 14
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Mushroom Walnut Tacos",
+                    foodPrice = 11.99,
+                    foodCategory = "American Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1152509492/photo/vegan-and-vegetarian-mexican-mushrooms-tacos-with-sauce-and-lime.jpg?s=612x612&w=is&k=20&c=qCoR7dpnxkAfMW3FvxYd17T-5VTZdykWcEaW5Kk8-RE=",
+                    restaurantId = 14
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Southwest Vegan Bowl",
+                    foodPrice = 10.99,
+                    foodCategory = "American Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/920020000/photo/mexican-tomato-bean-bell-pepper-soup-in-black-bowl.jpg?s=612x612&w=is&k=20&c=JE0W93a7lyMnpCPlJu8UxgkllA_Zpv_jkAdlsapY4w8=",
+                    restaurantId = 14
+                )
+            )
+            //restaurant 15
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Spicy Szechuan Tofu Stir Fry",
+                    foodPrice = 12.99,
+                    foodCategory = "Asian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1293564637/photo/mapo-tofu-stir-fried-tofu-with-hot-spicy-sauce-in-white-plate.jpg?s=612x612&w=is&k=20&c=KnbUr7lMIgI73X9gMGcwZfUMQm7hA013m8Ct9XqMWBY=",
+                    restaurantId = 15
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Miso Glazed Eggplant Donburi",
+                    foodPrice = 10.99,
+                    foodCategory = "Asian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1282087877/photo/korean-spicy-eggplant-with-spicy-sauce-and-sesame-seeds-in-a-bowl-of-rice-and-chopsticks-on-a.jpg?s=612x612&w=is&k=20&c=ilpRFzC11ZN8uH-2_S8Zhrqe7FP8GOn82aL1_jSeEps=",
+                    restaurantId = 15
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Thai Green Curry with Tofu",
+                    foodPrice = 13.99,
+                    foodCategory = "Asian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1218215429/photo/vegetarian-thai-green-curry-with-tofu-in-black-bowl-at-dark-slate-background-veg-green-thai.jpg?s=612x612&w=is&k=20&c=bevb9prW0GxXwzJorQWTyosfs-GQKBJhD_ywS66_qNE=",
+                    restaurantId = 15
+                )
+            )
+            //restaurant 16
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Buddah Bowl Bliss",
+                    foodPrice = 12.99,
+                    foodCategory = "Asian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1133157208/photo/healthy-vegan-championship-game-and-green-smoothie-on-dark-background.jpg?s=612x612&w=is&k=20&c=F9YnoYSkXKYtswDCN2VGXQF7hJyloLWxN_IMpjEHvWI=",
+                    restaurantId = 16
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Tomato Linguini Pasta",
+                    foodPrice = 14.99,
+                    foodCategory = "Asian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1407715348/photo/classic-linguini-pasta-with-tomatoes-on-a-light-gray-background.jpg?s=612x612&w=is&k=20&c=H5nU-DxoYLwOHueih07zCMsM5ubwEpDw6ti_iJ_FKPQ=",
+                    restaurantId = 16
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Chickpea Salad",
+                    foodPrice = 10.99,
+                    foodCategory = "Asian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1213546819/photo/chickpea-salad-on-a-gray-background-top-view.jpg?s=612x612&w=is&k=20&c=oJ2nkM-eVnSjsF-fbTmXZF1jJzZRg39tTGAQq9Q0_lo=",
+                    restaurantId = 16
+                )
+            )
+            //restaurant 17
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Lentil Dahl",
+                    foodPrice = 8.99,
+                    foodCategory = "Indian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1130228942/photo/indian-dal-traditional-indian-soup-lentils-indian-dhal-spicy-curry-in-bowl-spices-herbs.jpg?s=612x612&w=is&k=20&c=7qRkgEuKjIDYV5j5sXZuAYrEN3_LTWbg4rdYUPJq5Ok=",
+                    restaurantId = 17
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Vegetable Biryan",
+                    foodPrice = 10.99,
+                    foodCategory = "Indian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/179085494/photo/indian-biryani.jpg?s=612x612&w=is&k=20&c=-UCt4UXLBXH-6FswBUyW1CAJRb5KyKperUB69Aic6U0=",
+                    restaurantId = 17
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Tofu Tikka Masala",
+                    foodPrice = 9.99,
+                    foodCategory = "Indian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/486066908/photo/indian-style-cottage-cheese-vegetarian-curry-dish-kadai-paneer.jpg?s=612x612&w=is&k=20&c=fbxfWlvZZKzCqvLiP5Uu_Tv_6Yz29Wh0dKJOw-YQbyg=",
+                    restaurantId = 17
+                )
+            )
+            //restaurant 18
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Palak Paneer",
+                    foodPrice = 8.99,
+                    foodCategory = "Indian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/851889508/photo/palak-paneer.jpg?s=612x612&w=is&k=20&c=P4mM2ECDfprVS-YR6ZoshK5aWdTnH6kfx6r9ASyzwmo=",
+                    restaurantId = 18
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Chickpea Curry",
+                    foodPrice = 6.99,
+                    foodCategory = "Indian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1338173789/photo/image-blue-plates-homemade-punjabi-chole-meal-white-rice-lachha-paratha-spoon-fork-striped.jpg?s=612x612&w=is&k=20&c=YmxNL9BdYlOInrWfXyjoCH1xv4IW9j6MQ9CPi3s5Nng=",
+                    restaurantId = 18
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Aloo Gobi",
+                    foodPrice = 7.99,
+                    foodCategory = "Indian Vegan Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1317737079/photo/curry-roasted-cauliflower-vegetarian-vegetable-dish-selective-focus-copy-space.jpg?s=612x612&w=is&k=20&c=6k1KzTsA-abSc9Mf_FGXTnQdVGPrOUyKYjdGyYwawM4=",
+                    restaurantId = 18
+                )
+            )
+        }
+    }
+
+    private fun addVeganFood(capstoneViewModel: CapstoneViewModel) {
+        capstoneViewModel.viewModelScope.launch {
+            //restaurant 19
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Tofu Teriyaki Bowl",
+                    foodPrice = 10.99,
+                    foodCategory = "East Asian Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1176497385/photo/teriyaki-tofu-salad-with-kale-and-chickpeas-in-a-wooden-bowl-copy-space-top-view.jpg?s=612x612&w=is&k=20&c=e94xgxEJRhdy4WlZsYRAc42mw3IqXeQMsmxZEiz1s3c=",
+                    restaurantId = 19
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Sesame Ginger Noodles",
+                    foodPrice = 9.99,
+                    foodCategory = "East Asian Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/628471696/photo/soba-noodle-ginger-garlic-soy-sauce.jpg?s=612x612&w=is&k=20&c=xQgEoUZbO9UzuOflsDAcMU6aMtjITCMYcq38jRnFL4I=",
+                    restaurantId = 19
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Vegetable Hot Pot",
+                    foodPrice = 13.99,
+                    foodCategory = "East Asian Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/689905218/photo/japanese-hot-pot-chanko-nabe.jpg?s=612x612&w=is&k=20&c=MgMHdYhecD7SHIC7kWkqy-wyA3R5Xes84PbGVMnh-k4=",
+                    restaurantId = 19
+                )
+            )
+
+            //restaurant 20
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Vegetarian Bibimbap ",
+                    foodPrice = 11.49,
+                    foodCategory = "East Asian Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1177113079/photo/grilled-tofu-buddha-bowl.jpg?s=612x612&w=is&k=20&c=sPEn6kEb1cD78k27RVUjDJa0HXSD9l2wa1_KY1EQWeU=",
+                    restaurantId = 20
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Vegetarian Stir-Fried Udon Noodles",
+                    foodPrice = 10.99,
+                    foodCategory = "East Asian Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1135287343/photo/udon-stir-fry-noodles-with-vegetables-in-wok-pan.jpg?s=612x612&w=is&k=20&c=Mx3T5npXGITN3W3v58QOJkvsoXXpsR4yztGcdVFEzBs=",
+                    restaurantId = 20
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Kimchi Fried Rice",
+                    foodPrice = 7.99,
+                    foodCategory = "East Asian Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1255727377/photo/kimchi-fried-rice-with-fried-egg-and-nori.jpg?s=612x612&w=is&k=20&c=uq7MeGcUxYeS-wIDwNNIo--O6Y-W7DhXsqq5082JIw0=",
+                    restaurantId = 20
+                )
+            )
+
+            //restaurant 21
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Zen Bowl",
+                    foodPrice = 12.99,
+                    foodCategory = "Vegetarian Fusion Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1293479617/photo/woman-hands-eating-vegan-salad-of-baked-vegetables-avocado-tofu-and-buckwheat-buddha-bowl-top.jpg?s=612x612&w=is&k=20&c=O_V2oJmE4AOJcBix3y3EmJhJhMevoCGVIl_WpWR5XDk=",
+                    restaurantId = 21
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Sesame Seitan Stir-fry",
+                    foodPrice = 13.99,
+                    foodCategory = "Vegetarian Fusion Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1783213599/photo/stir-fried-tempeh-and-long-beans.jpg?s=612x612&w=is&k=20&c=f2BRyKV-_o9MVRh0XWL0e2M0W3Jrg1uYHDprUEFjV5g=",
+                    restaurantId = 21
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Zen Garden Pizza",
+                    foodPrice = 14.99,
+                    foodCategory = "Vegetarian Fusion Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/842082336/photo/homemade-veggie-pizza-with-mushrooms-peppers.jpg?s=612x612&w=is&k=20&c=_au8qOMosP9q4PrUQmtHFqHHNGyMMJUNVs4044eoF_0=",
+                    restaurantId = 21
+                )
+            )
+            //restaurant 22
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Mexican Tacos ",
+                    foodPrice = 11.99,
+                    foodCategory = "Vegetarian Fusion Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1253305040/photo/mexican-traditional-authentic-homemade-tacos-with-pulled-pork-beef-chili-con-carne-serve-with.jpg?s=612x612&w=is&k=20&c=1M5gyymkRg5fFUgKdvo5a8ebawniekJX3sjch2QHFdQ=",
+                    restaurantId = 22
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Saffron Infused Risotto",
+                    foodPrice = 15.99,
+                    foodCategory = "Vegetarian Fusion Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/494182241/photo/risotto.jpg?s=612x612&w=is&k=20&c=YV34JS_HtJ3t6sD9S87XfKQgdopfXZNV4ZqoaL73zhw=",
+                    restaurantId = 22
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Quinoa Stuffed Bell Peppers ",
+                    foodPrice = 11.99,
+                    foodCategory = "Vegetarian Fusion Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/641769648/photo/raw-quinoa-stuffed-sweet-peppers-in-a-cast-iron-skillet-top-view-healthy-vegetarian-food.jpg?s=612x612&w=is&k=20&c=3VLI3TmkFFnN-7lGsDIY3CEBnAR7Nq55Gps091Ij_E8=",
+                    restaurantId = 22
+                )
+            )
+
+            //restaurant 23
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Butternut Squash Ravioli ",
+                    foodPrice = 12.99,
+                    foodCategory = "Western Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1356661908/photo/homemade-butternut-squash-ravioli.jpg?s=612x612&w=is&k=20&c=TxM0A_GVAm05mnIFwtIPpSiy7yPf2uD1eyHgUHgHSpE=",
+                    restaurantId = 23
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Roasted Beetroot and Goat Cheese Salad ",
+                    foodPrice = 9.99,
+                    foodCategory = "Western Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1194291229/photo/vegetarian-salad-sheep-cheese-baked-roasted-vegetables-keto-ketogenic-dash-diet-mix-of.jpg?s=612x612&w=is&k=20&c=XvgQpceIwqSZK5BmkPl6sIvltG7B8sCyeP9wC07-ft8=",
+                    restaurantId = 23
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Vegetarian Cowboy Chilli",
+                    foodPrice = 9.99,
+                    foodCategory = "Western Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/519891447/photo/spicy-cowboy-beans-with-hassleback-potatoe-with-herbs.jpg?s=612x612&w=is&k=20&c=NMDmyqWi_6JHKg5SdqypcQ6Ffz3NO_7wq69QXzeIfEk=",
+                    restaurantId = 23
+                )
+            )
+
+            //restaurant 24
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Spinach and Ricotta Ravioli",
+                    foodPrice = 13.99,
+                    foodCategory = "Western Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/506895136/photo/ravioli-with-spinach-and-ricotta-cheese-parmesan-in-a-plate.jpg?s=612x612&w=is&k=20&c=tdzlmTTArWzEpjj6rfVC1lshnflSXEEBQgTti7OrQYQ=",
+                    restaurantId = 24
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Mediterranean Veggie Wrap",
+                    foodPrice = 10.99,
+                    foodCategory = "Western Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1420910368/photo/wraps-with-a-soft-flatbread-rolled-around-a-filling-with-vegetables-and-cheese-tomato-fried.jpg?s=612x612&w=is&k=20&c=0xor2bAd0haFJWkbBWsr_kTGRV9_jrH7UbvA1_3lgmA=",
+                    restaurantId = 24
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Roasted Butternut Squash Soup",
+                    foodPrice = 8.99,
+                    foodCategory = "Western Vegetarian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1276910170/photo/pumpkin-and-carrot-soup-with-cream-in-black-bowl-dark-background-top-view.jpg?s=612x612&w=is&k=20&c=MiWiA-ZC1Q36bILgeMEITaobjQBtfhV8i5QykQ6OzPs=",
+                    restaurantId = 24
+                )
+            )
+        }
+    }
+
+    private fun addNonHalalFood(capstoneViewModel: CapstoneViewModel) {
+        capstoneViewModel.viewModelScope.launch {
+            //restaurant 7
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Fiery Szechuan Beef",
+                    foodPrice = 14.99,
+                    foodCategory = "Chinese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1193264018/photo/szechwan-dish-shuizhu-beef-served-at-lunchtime-in-yokohama.jpg?s=612x612&w=is&k=20&c=AtB5jSl8lXANguIb5kWGfd9k8su_uYJJ-cgsuaRwy80=",
+                    restaurantId = 7
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Crispy Pork Belly with Chili Garlic Sauce",
+                    foodPrice = 12.99,
+                    foodCategory = "Chinese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1449825872/photo/fried-crispy-pork-with-jasmine-rice-in-the-food-containner.jpg?s=612x612&w=is&k=20&c=Ds7L2vLgoBaqzT2T-bDF7e_pLtp-_FEbJ5i2fKtTDLY=",
+                    restaurantId = 7
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Salt and Pepper Squid",
+                    foodPrice = 10.99 ,
+                    foodCategory = "Chinese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/157103558/photo/salt-and-pepper-squid.jpg?s=612x612&w=is&k=20&c=LsuULz3C8tyAEZlKhoSYguRkQ6suEvK_S8AX1uwsAog=",
+                    restaurantId = 7
+                )
+            )
+
+            //restaurant 8
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Peking Duck with Hoisin Sauce",
+                    foodPrice = 18.99,
+                    foodCategory = "Chinese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/584211460/photo/crispy-peking-duck-wraps.jpg?s=612x612&w=is&k=20&c=cOK-FwYzo6Y4NnQkkgH7bKHN7YAUmtgZhG45nDAO79E=",
+                    restaurantId = 8
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Spicy Kung Pao Chicken",
+                    foodPrice = 13.99,
+                    foodCategory = "Chinese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1176607728/photo/schezwan-chicken-or-dragon-chicken-in-black-bowl-at-dark-slate-background-szechuan-chicken-is.jpg?s=612x612&w=is&k=20&c=egABAbT_-LY6xuT4C0bpqFrJf2uW0elISTHuqmfZJwA=",
+                    restaurantId = 8
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Braised Pork Spare Ribs",
+                    foodPrice = 15.99,
+                    foodCategory = "Chinese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1401959852/photo/homemade-spicy-asian-baby-back-ribs.jpg?s=612x612&w=is&k=20&c=Z8nn0ALiYrq4KmCkkT0tBXL9rIJlCHqSjt3x6o8fGgM=",
+                    restaurantId = 8
+                )
+            )
+            //restaurant 9
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Spicy Pork Bulgogi",
+                    foodPrice = 15.99,
+                    foodCategory = "Korean Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1327254229/photo/stir-fried-pork-kimchi.jpg?s=612x612&w=is&k=20&c=3LHYQe3Hz0032MV4euhvtFC3Bz2CFy_7MbH5l3Pj7f8=",
+                    restaurantId = 9
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Kimchi Jjigae",
+                    foodPrice = 12.99,
+                    foodCategory = "Korean Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1309116531/photo/korean-army-base-stew.jpg?s=612x612&w=is&k=20&c=mfzF6wSVJ66HOzG0a4MHyrxD1li-rLRDYd2LOJD6OyM=",
+                    restaurantId = 9
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Seafood Pancake",
+                    foodPrice = 14.99,
+                    foodCategory = "Korean Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1289388785/photo/shrimp-and-garlic-chive-korean-pancake.jpg?s=612x612&w=is&k=20&c=VFIK_qIpWhEFURRYB1Q4iSVSzLx0qY6c-LuYTsSveBc=",
+                    restaurantId = 9
+                )
+            )
+            //restaurant 10
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Dakgalbi (Spicy Stir-Fried Chicken) ",
+                    foodPrice = 16.99,
+                    foodCategory = "Korean Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1439939007/photo/dakgalbi-or-dak-galbi-is-korean-spicy-chicken-stir-fry.jpg?s=612x612&w=is&k=20&c=62HG8aTALaUJELqSBl22IuxkDh3AM2VcqKRH0MVSZTc=",
+                    restaurantId = 10
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Japchae (Stir-Fried Glass Noodle",
+                    foodPrice = 13.99,
+                    foodCategory = "Korean Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/534832769/photo/stir-fried-glass-noodles-and-vegetables.jpg?s=612x612&w=is&k=20&c=D5PidSa8FiCVX1qQHybPiFfQKiOa8QZHcLIA3LxHh_o=",
+                    restaurantId = 10
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Bibimbap",
+                    foodPrice = 11.99,
+                    foodCategory = "Korean Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/493066234/photo/korean-bibimbap-dish.jpg?s=612x612&w=is&k=20&c=6l_mgazd-PVGz_Hf6HNWlwePUiZ24ctt9vbHWet6wXE=",
+                    restaurantId = 10
+                )
+            )
+            //restaurant 11
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Spicy Basil Beef",
+                    foodPrice = 12.99,
+                    foodCategory = "Thai Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1335248053/photo/top-view-of-basil-rice-with-pork-or-beef-topping-fried-egg-thai-food.jpg?s=612x612&w=is&k=20&c=Y2djkpQ-86_y63fKWz3HaxddIS5P8Olh0lz1gsndHEk=",
+                    restaurantId = 11
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Tom Yum Goong Soup",
+                    foodPrice = 9.99,
+                    foodCategory = "Thai Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1172903419/photo/thailands-famous-rich-red-coconut-milk-based-delicious-tom-yam-kung-soup-in-a-bowl-on-an.jpg?s=612x612&w=is&k=20&c=UdLl2i8MGFcpQWguwMTz55fChp2vOBSRH-w97utbd3Y=",
+                    restaurantId = 11
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Crispy Garlic Pork",
+                    foodPrice = 11.99,
+                    foodCategory = "Thai Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1284510765/photo/fried-pork-with-garlic-and-sticky-rice-on-plate-thai-food.jpg?s=612x612&w=is&k=20&c=xDy0wUqg-tjCOPQbjCMUB8MRNNSBpUaG4SqmJXqYqdE=",
+                    restaurantId = 11
+                )
+            )
+            //restaurant 12
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Thai Chili Chicken",
+                    foodPrice = 10.99,
+                    foodCategory = "Thai Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1450841111/photo/thai-chinese-food-chicken-with-cashew-nuts-or-gai-pad-med-mamuang.jpg?s=612x612&w=is&k=20&c=CKDWEDoEjIBKcDypa5y-l3K8w2JkmjtyR2in8gVvdtc=",
+                    restaurantId = 12
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Pad Thai Noodles",
+                    foodPrice = 13.99,
+                    foodCategory = "Thai Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/596799642/photo/beef-pad-thai-shot-from-overhead-view.jpg?s=612x612&w=is&k=20&c=2yDobTQcGhen_OpYOxoWPwrF7VvLd8cp719zFnCqqr4=",
+                    restaurantId = 12
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Coconut Milk Curry Shrimp",
+                    foodPrice = 14.99,
+                    foodCategory = "Thai Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1367359911/photo/thai-shrimps-red-curry-thailand-tradition-red-curry-soup-with-shrimps-prawns-and-coconut-milk.jpg?s=612x612&w=is&k=20&c=1koxm4CgfC2QOOHkQ_Fe_WY_BGQwDqgEI1ti6T6ZqTY=",
+                    restaurantId = 12
+                )
+            )
+        }
+    }
+
+    private fun addHalalFood(capstoneViewModel: CapstoneViewModel) {
+        capstoneViewModel.viewModelScope.launch {
+            //restaurant 1
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Nasi Goreng Bunga Raya",
+                    foodPrice = 12.99,
+                    foodCategory = "Malaysian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/526149515/photo/nasi-lemak-malaysian-cuisine.jpg?s=1024x1024&w=is&k=20&c=X3PeiA2SK_qAxpoq3L6d_Ktyiwx8NMHctkm98svTyL0=",
+                    restaurantId = 1
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Ayam Percik Delight",
+                    foodPrice = 14.99,
+                    foodCategory = "Malaysian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1342290072/photo/malaysian-ayam-percik-or-roasted-spiced-chicken-is-a-grilled-chicken-dish-that-is-cooked-with.jpg?s=2048x2048&w=is&k=20&c=OuWc5HofsPgvWhcN3MSU6I6cJyq6E1hf_IZYIQtwfBM=",
+                    restaurantId = 1
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Seafood Laksa Supreme",
+                    foodPrice = 16.99,
+                    foodCategory = "Malaysian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1035322500/photo/coconut-shrimp-laksa-soup-on-a-dark-background-top-view-copy-space.jpg?s=2048x2048&w=is&k=20&c=qrKbhDcAPzsb_fHlhggTZrK0cJMUZUV6Wa8YAScxcvQ=",
+                    restaurantId = 1
+                )
+            )
+            //restaurant 2
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Nasi Goreng Kampung",
+                    foodPrice = 12.99,
+                    foodCategory = "Malaysian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1466561162/photo/village-fried-rice-or-nasi-goreng-kampung-made-with-lots-of-toppings-tomato-fried-egg-crisp.jpg?s=612x612&w=is&k=20&c=pGSCLiNVqpev9cKxHgQa_6-SfPhF8fJiOJZnp3WZjJ0=",
+                    restaurantId = 2
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Ayam Masak Merah",
+                    foodPrice = 14.99,
+                    foodCategory = "Malaysian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1281369179/photo/tom-kha-gai-coconut-milk-soup-with-chicken-thai-traditional-food-with-ingredients.jpg?s=612x612&w=is&k=20&c=ES0GY8r9HZFOU-GyRSaKjyAPP7fydflioOBzjMBDpow=",
+                    restaurantId = 2
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Sambal Udang Petai",
+                    foodPrice = 16.99,
+                    foodCategory = "Malaysian Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1399678191/photo/chili-prawns.jpg?s=612x612&w=is&k=20&c=kHLzShqTHuB0IERIWgUDAagPMgjU_l9jUAqI_8ILAjg=",
+                    restaurantId = 2
+                )
+            )
+
+            //restaurant 3
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Sakura Rainbow Roll ",
+                    foodPrice = 12.99,
+                    foodCategory = "Japanese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1316208852/photo/a-stack-of-beautiful-sushi-on-a-wooden-texture-table-delicious-food.jpg?s=612x612&w=is&k=20&c=jBKv-4gJvmQHp1pt6dZbUuNvNd3DI4Lh5KxGtovSHmM=",
+                    restaurantId = 3
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Halal Tempura Crunch Roll",
+                    foodPrice = 10.99,
+                    foodCategory = "Japanese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1143627722/photo/crunchy-roll-rice-roll-of-prawn-tempura-with-spicy-miso-sauce-japanese-food.jpg?s=612x612&w=is&k=20&c=SpX3J_7kMWI1RSFpgwRA83oc94PIWRNpo7xkqOLq_zM=",
+                    restaurantId = 3
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Teriyaki Chicken Bento Box",
+                    foodPrice = 14.99,
+                    foodCategory = "Japanese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/154311143/photo/japanese-cuisine-chicken-teriyaki%E3%80%80bento.jpg?s=612x612&w=is&k=20&c=kj4khiZaSUUeS_3971YPvjYM4k4F_oakdK4XgE1Rn5o=",
+                    restaurantId = 3
+                )
+            )
+
+            //restaurant 4
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Zen Ramen Delight",
+                    foodPrice = 12.99,
+                    foodCategory = "Japanese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/627218822/photo/instant-noodle.jpg?s=612x612&w=is&k=20&c=ZU_cbOt9pk80S8FgYyGKyGasZMLz2TAJWPE870oNOlA=",
+                    restaurantId = 4
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Teppanyaki Teriyaki Chicken",
+                    foodPrice = 15.99,
+                    foodCategory = "Japanese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1410669727/photo/chicken-teriyaki-served-in-a-dish-isolated-on-wooden-background-side-view-of-teppanyaki.jpg?s=612x612&w=is&k=20&c=IwUB_xDz12VYC9ztyM86IFVlFsMCHWTmOvP9uz1AaGE=",
+                    restaurantId = 4
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Sizzling Seafood Udon",
+                    foodPrice = 18.99,
+                    foodCategory = "Japanese Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/484385880/photo/seafood-udon.jpg?s=612x612&w=is&k=20&c=_YuEPa_bk8S552gbGLaDNQvoLzvhUTm1pr-5NN_oaz0=",
+                    restaurantId = 4
+                )
+            )
+
+            //restaurant 5
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Sultan's Delight",
+                    foodPrice = 15.99,
+                    foodCategory = "Western Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1986028746/photo/hunkar-begendi-made-with-eggplant-and-meat-served-in-glasgow-scotland-england-uk.jpg?s=612x612&w=is&k=20&c=pBzcgu6E5rrV9c2DbQ7cuU8KsHnW7Fo0rxXqGbSLG_w=",
+                    restaurantId = 5
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Arabian Night's Lamb Shank",
+                    foodPrice = 18.99,
+                    foodCategory = "Western Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1452629339/photo/spice-marinated-grilled-lamb-chops-or-rack-with-baby-potatoes-and-roast-gravy.jpg?s=612x612&w=is&k=20&c=3Abx1O9koe3LrMPE0o9qGc1AZvO4i22HYzLDEYnN6bs=",
+                    restaurantId = 5
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Casablanca Seafood Linguine",
+                    foodPrice = 20.99,
+                    foodCategory = "Western Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1129614168/photo/traditional-italian-seafood-pasta-with-clams-spaghetti-alle-vongole-in-the-pan.jpg?s=612x612&w=is&k=20&c=KeIwrPDrwG5P_U-zpObzkETe71eXinEuaxCvl0q_3iE=",
+                    restaurantId = 5
+                )
+            )
+
+            //restaurant 6
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Arabian Spice Ribeye",
+                    foodPrice = 24.99,
+                    foodCategory = "Western Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1422307046/photo/spicy-lamb-chops-with-salad-mayo-dip-chili-sauce-and-fries-isolated-on-cutting-board-side.jpg?s=612x612&w=is&k=20&c=PTAEA0PF9VZE8m6tgcTbz8yydexOEgSt-HzTPiq35K0=",
+                    restaurantId = 6
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Mediterranean Lamb Burger",
+                    foodPrice = 16.99,
+                    foodCategory = "Western Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/637790866/photo/100-lamb-greek-burger.jpg?s=612x612&w=is&k=20&c=AXS2UXyTCDO1v5jDnl5rW1T2CiBRx3C7-_il1SoX79s=",
+                    restaurantId = 6
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Shawarma Platter (Chicken)",
+                    foodPrice = 18.99,
+                    foodCategory = "Western Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1327266181/photo/shawarma-beef-plate-solated-on-white-background-n.jpg?s=612x612&w=is&k=20&c=f8egJZoxxe17WGTCY6Jigakjijb2qzKuHbIU7uBXDVY=",
+                    restaurantId = 6
+                )
+            )
+            capstoneViewModel.insertFood(
+                Food(
+                    foodName = "Shawarma Platter (Beef)",
+                    foodPrice = 20.99,
+                    foodCategory = "Western Cuisine",
+                    foodImage = "https://media.istockphoto.com/id/1327266181/photo/shawarma-beef-plate-solated-on-white-background-n.jpg?s=612x612&w=is&k=20&c=f8egJZoxxe17WGTCY6Jigakjijb2qzKuHbIU7uBXDVY=",
+                    restaurantId = 6
+                )
+            )
         }
     }
 }

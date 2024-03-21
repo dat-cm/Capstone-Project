@@ -20,26 +20,35 @@ fun multiSelectionFoodClassification(
 ): SnapshotStateList<String> {
     var options = listOf<String>()
     when (userClassification) {
-        "Halal", "Non-Halal", "No Preference" ->
+        "Halal" ->
             options =
                 listOf(
-                    "Meat",
-                    "Rice",
-                    "Dessert",
-                    "Noodles",
-                    "Seafood",
-                    "Fast food",
+                    "Malaysian Cuisine",
+                    "Japanese Cuisine",
+                    "Western Cuisine",
+                )
+        "Non-Halal" ->
+            options =
+                listOf(
+                    "Chinese Cuisine",
+                    "Korean Cuisine",
+                    "Thai Cuisine"
+            )
+
+        "Vegan" ->
+            options =
+                listOf(
+                    "American Vegan Cuisine",
+                    "Asian Vegan Cuisine",
+                    "Indian Vegan Cuisine",
                 )
 
-        "Vegan/Vegetarian" ->
+        "Vegetarian" ->
             options =
                 listOf(
-                    "Rice",
-                    "Soup",
-                    "Salad",
-                    "Dessert",
-                    "Noodles",
-                    "Fast food",
+                    "East Asian Vegetarian Cuisine",
+                    "Vegetarian Fusion Cuisine",
+                    "Western Vegetarian Cuisine:",
                 )
     }
 

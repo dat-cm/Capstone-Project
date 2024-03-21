@@ -56,7 +56,13 @@ fun PreferencesUI(
                 TopAppBar(
                     title = { Text("Preferences") },
                     navigationIcon = {
-                        IconButton(onClick = { navController.navigate(Routes.Selection.route) }) {
+                        IconButton(onClick = {
+                            if (user?.userPref == false){
+                                navController.navigate(Routes.Home.route)
+                            } else {
+                                navController.navigate(Routes.Selection.route)
+                            }
+                        }) {
                             Icon(
                                 imageVector = Icons.Default.Close,
                                 contentDescription = "Close",
@@ -71,20 +77,23 @@ fun PreferencesUI(
             paddingValue ->
         Column(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = paddingValue.calculateTopPadding() + 8.dp,
-                        start = 16.dp,
-                        end = 16.dp,
-                    ),
+            Modifier
+                .fillMaxWidth()
+                .padding(
+                    top = paddingValue.calculateTopPadding() + 8.dp,
+                    start = 16.dp,
+                    end = 16.dp,
+                ),
         ) {
             // halal/non-halal/...
             UserClassificationChoiceTextUI()
             userClassification = selectUserClassification(userPref?.userClassification ?: "")
             if (userClassification != "") {
                 FoodPreferenceChoiceTextUI()
-                userFoodPreferences = multiSelectionFoodClassification(userClassification, userPref?.userFoodClassification ?: emptyList())
+                userFoodPreferences = multiSelectionFoodClassification(
+                    userClassification,
+                    userPref?.userFoodClassification ?: emptyList()
+                )
                 if (userFoodPreferences.isNotEmpty()) {
                     BudgetTextUI(userBudget)
                     userBudget = budgetSlider(userPref?.userBudget?.toInt() ?: 0)
@@ -94,9 +103,9 @@ fun PreferencesUI(
             // save button
             Button(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(top = 40.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(top = 40.dp),
                 colors = ButtonDefaults.buttonColors(PartyPink),
                 onClick = {
                     viewModel.saveUserPreferences(

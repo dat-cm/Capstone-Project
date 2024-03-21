@@ -28,8 +28,8 @@ fun selectUserClassification(userPref: String) : String {
     ) {
         SingleSelectItem("Halal", selectedOption) { selectedOption.value = it }
         SingleSelectItem("Non-Halal", selectedOption) { selectedOption.value = it }
-        SingleSelectItem("Vegan/Vegetarian", selectedOption) { selectedOption.value = it }
-        SingleSelectItem("No Preference", selectedOption) { selectedOption.value = it }
+        SingleSelectItem("Vegan", selectedOption) { selectedOption.value = it }
+        SingleSelectItem("Vegetarian", selectedOption) { selectedOption.value = it }
     }
     Log.i("single", selectedOption.value)
 
